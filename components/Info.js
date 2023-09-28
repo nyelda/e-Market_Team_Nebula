@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button} from 'react-native';
 export default function Info() {
     return (
       <View style={styles.but}>
-        <Button color='#EFD02C' title='Login'/>
         <Text style={styles.style1}>Forgot Password?</Text>
         <Text style={styles.style2}>New Here? Create an Account</Text>
       </View>
@@ -12,7 +11,7 @@ export default function Info() {
 
 const styles = StyleSheet.create({
   but: {
-    paddingBottom: '50',
+    paddingBottom: 50,
   },
   style1: {
     fontSize: 15,
@@ -30,5 +29,5 @@ const styles = StyleSheet.create({
     color: '#EFD02C',
     paddingBottom: 10,
     textDecorationLine: 'underline',
-  },
-})
+  }
+});
