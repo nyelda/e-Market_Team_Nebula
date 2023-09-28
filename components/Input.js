@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         width: 'auto',
         height: 5,
+        color: '#EFD02C',
     },
     container: {
         width: '100%',
