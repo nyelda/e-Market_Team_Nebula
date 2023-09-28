@@ -3,18 +3,22 @@ import React from 'react'
 
 export default function Logo() {
   return (
-    <View style={styles.img}>
+    <View style={styles.innerContainer}>
       <Image
-        source={require('../assets/Logo.png')}      
-        style={{ width: 300, height: 300}}
-      />
+        source={require('../assets/Logo.png')}  
+        style={styles.img}/>    
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+    innerContainer: {
+      padding: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     img: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
+      width: 200, 
+      height: 200,
+    },
+});

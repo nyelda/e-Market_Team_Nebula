@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   style1: {
-    fontSize: 17,
+    fontSize: 15,
     textAlign: 'center',
     margin: 20,
     fontWeight: 'bold',
@@ -22,9 +22,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   style2: {
-    fontSize: 17,
+    fontSize: 15,
     textAlign: 'center',
-    margin: 20,
     fontWeight: 'bold',
     color: '#EFD02C',
     textDecorationLine: 'underline',

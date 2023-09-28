@@ -30,8 +30,10 @@ const styles = StyleSheet.create({
         borderColor: '#EFD02C',
         borderWidth: 1,
         fontSize: 18,
-        borderRadius: 20,
+        borderRadius: 10,
         fontStyle: 'italic',
+        width: 'auto',
+        height: 5,
     },
     container: {
         width: '100%',
