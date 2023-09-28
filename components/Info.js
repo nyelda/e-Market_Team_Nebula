@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 export default function Info() {
     return (
       <View style={styles.but}>
@@ -14,20 +14,19 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   style1: {
-    fontSize: 15,
+    fontSize: 17,
     textAlign: 'center',
-    margin: 7,
-    fontWeight: 'normal',
+    margin: 20,
+    fontWeight: 'bold',
     color: '#EFD02C',
     textDecorationLine: 'underline',
   },
   style2: {
-    fontSize: 20,
+    fontSize: 17,
     textAlign: 'center',
-    margin: 15,
-    fontWeight: 'normal',
+    margin: 20,
+    fontWeight: 'bold',
     color: '#EFD02C',
-    paddingBottom: 10,
     textDecorationLine: 'underline',
-  }
+  },
 });

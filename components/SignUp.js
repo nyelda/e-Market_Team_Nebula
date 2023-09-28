@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export default function SignUp() {
     return (
@@ -19,8 +19,10 @@ const styles = StyleSheet.create({
     signUp: {
         fontSize: 18,
         backgroundColor: "#EFD02C",
-        paddingVertical: 8,
-        paddingHorizontal: 20,
-        borderRadius: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 35,
+        borderRadius: 5,
+        fontWeight: 'bold',
+        color: '#545F71',
     },
 });

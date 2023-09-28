@@ -27,10 +27,11 @@ const styles = StyleSheet.create({
     },
     input: {
         padding: 20,
-        borderColor: 'yellow',
+        borderColor: '#EFD02C',
         borderWidth: 1,
         fontSize: 18,
         borderRadius: 20,
+        fontStyle: 'italic',
     },
     container: {
         width: '100%',
