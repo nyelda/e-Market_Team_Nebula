@@ -3,9 +3,12 @@ import { StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 export default function SignUp() {
     return (
-        <TouchableOpacity style={styles.container}>
-            <Text style={styles.signUp}>Login</Text>
-        </TouchableOpacity>
+        <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => navigation.navigate('LoggedIn')}
+      >
+        <Text style={styles.loginText}>Login</Text>
+      </TouchableOpacity>
     );
 }
 
