@@ -7,6 +7,7 @@ import Welcome from "./components/Welcome";
 import Input from "./components/Input";
 import Info from "./components/Info";
 import Login from "./components/Login";
+import 
 
 const Stack = createStackNavigator();
 
