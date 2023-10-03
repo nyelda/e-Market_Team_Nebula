@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function NewAccount({ navigation }) {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,6 +16,13 @@ export default function NewAccount({ navigation }) {
       <Text style={styles.text1}>Enter your account details below...</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setEmail(text)}
+        />
+      </View> {/* This closing tag was missing */}
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setUsername(text)}

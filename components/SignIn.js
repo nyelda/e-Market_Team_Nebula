@@ -14,7 +14,7 @@ export default function NewAccount({ navigation }) {
       <Text style={styles.header}>Welcome, dear TIPian!</Text>
       <Text style={styles.text1}>Log in below and enter your credentials...</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
+        <Text style={styles.label}>Email/Username</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => setUsername(text)}
