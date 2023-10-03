@@ -6,8 +6,8 @@ export default function Input() {
     <KeyboardAvoidingView 
     style={styles.inputGroup}>
         <View style={styles.container}>
-            <Text style={styles.textColor}> Email </Text>
-            <TextInput style={styles.input} placeholder="Email" />
+            <Text style={styles.textColor}> Email/Username </Text>
+            <TextInput style={styles.input} placeholder="Email/Username" />
         </View>
         <View style={styles.container}>
             <Text style={styles.textColor}> Password </Text>
