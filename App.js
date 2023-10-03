@@ -6,7 +6,9 @@ import Logo from "./components/Logo";
 import Welcome from "./components/Welcome";
 import Input from "./components/Input";
 import Info from "./components/Info";
-import Login from "./components/Login";
+import Home from "./components/Home";
+import Account from "./components/Account";
+import SignIn from "./components/SignIn";
 
 
 const Stack = createStackNavigator();
@@ -33,7 +35,7 @@ export default function App() {
             headerTintColor: '#545F71', 
           }}
         />
-        <Stack.Screen name="LoggedIn" component={Login} 
+        <Stack.Screen name="Homepage" component={Home} 
         options={{
           headerTitle: 'TSe-Market Homepage', 
           headerTitleAlign: 'center', 
@@ -49,6 +51,42 @@ export default function App() {
           headerTintColor: '#545F71', 
         }}
         />
+      <Stack.Screen
+        name="NewAccount"
+        component={Account}
+        options={{
+          headerTitle: 'Create New Account', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+            fontFamily: 'lucida grande',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+        }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          headerTitle: 'Sign-in to your Account', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+            fontFamily: 'lucida grande',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+        }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -62,11 +100,20 @@ function HomeScreen({ navigation }) {
       <Input />
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={() => navigation.navigate('LoggedIn')}
+        onPress={() => navigation.navigate('Homepage')}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
       <Info />
+      <TouchableOpacity
+        style={styles.newAccountButton}
+        onPress={() => navigation.navigate('NewAccount')}
+      >
+        <View style={styles.but}>
+          <Text style={styles.style2}>New Here? Create an Account</Text>
+        </View>
+      </TouchableOpacity>
+      
     </View>
   );
 }
@@ -92,5 +139,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#545F71',
+  },
+  but: {
+    paddingBottom: 30,
+  },
+  style1: {
+    fontSize: 15,
+    textAlign: 'center',
+    margin: 20,
+    fontWeight: 'bold',
+    color: '#EFD02C',
+    textDecorationLine: 'underline',
+  },
+  style2: {
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#EFD02C',
+    textDecorationLine: 'underline',
   },
 });

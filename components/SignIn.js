@@ -6,13 +6,13 @@ export default function NewAccount({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleCreateAccount = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('Homepage');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Create an account</Text>
-      <Text style={styles.text1}>Enter your account details below...</Text>
+      <Text style={styles.header}>Welcome, dear TIPian!</Text>
+      <Text style={styles.text1}>Log in below and enter your credentials...</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -32,7 +32,7 @@ export default function NewAccount({ navigation }) {
         style={styles.createButton}
         onPress={handleCreateAccount}
       >
-        <Text style={styles.createButtonText}>Sign Up</Text>
+        <Text style={styles.createButtonText}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );

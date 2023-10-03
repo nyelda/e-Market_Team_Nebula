@@ -4,14 +4,13 @@ export default function Info() {
     return (
       <View style={styles.but}>
         <Text style={styles.style1}>Forgot Password?</Text>
-        <Text style={styles.style2}>New Here? Create an Account</Text>
       </View>
     )
   }
 
 const styles = StyleSheet.create({
   but: {
-    paddingBottom: 50,
+    paddingBottom: 20,
   },
   style1: {
     fontSize: 15,
@@ -29,3 +28,4 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+

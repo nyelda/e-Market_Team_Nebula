@@ -1,12 +1,10 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
 export default function Login() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Handle the search button press
   const handleSearch = () => {
-    // Handle the search functionality here with the searchQuery state
     console.log('Search Query:', searchQuery);
   };
   return (
@@ -26,8 +24,9 @@ export default function Login() {
         <Image
           source={require('../assets/TSe-Market LOGO FINAL.png')}  
           style={styles.img}/>    
-      </View>
-      <Text>HOMEPAGE NA MAY SEARCH BAR</Text>
+      </View >
+      
+      <Text style={styles.text1}>Searching for second-hand items wil be a click away!</Text>
     </View>
     
   );
@@ -71,5 +70,12 @@ const styles = StyleSheet.create({
   searchButtonText: {
     color: '#545F71',
     fontWeight: 'bold',
+  },
+  text1: {
+    fontSize: 17,
+    color: '#EFD02C',
+    marginBottom: 30,
+    textAlign: 'center',
+    fontStyle: 'italic'
   },
 });
