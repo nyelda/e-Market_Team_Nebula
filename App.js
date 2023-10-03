@@ -35,7 +35,7 @@ export default function App() {
         />
         <Stack.Screen name="LoggedIn" component={Login} 
         options={{
-          headerTitle: 'TIPians Second-hand e-Market', 
+          headerTitle: 'TSe-Market Homepage', 
           headerTitleAlign: 'center', 
           headerTitleStyle: {
             fontSize: 24, 
