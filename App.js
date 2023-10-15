@@ -7,7 +7,7 @@ import Welcome from "./components/Welcome";
 import Input from "./components/Input";
 import Info from "./components/Info";
 import Home from "./components/Home";
-import Account from "./components/Account";
+import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 
 
@@ -53,7 +53,7 @@ export default function App() {
         />
       <Stack.Screen
         name="Create Account"
-        component={Account}
+        component={CreateAcc}
         options={{
           headerTitle: 'Create New Account', 
           headerTitleAlign: 'center',
