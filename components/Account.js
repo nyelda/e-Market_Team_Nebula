@@ -7,7 +7,7 @@ export default function NewAccount({ navigation }) {
   const [password, setPassword] = useState('');
 
   const handleCreateAccount = () => {
-    navigation.navigate('SignIn');
+    navigation.navigate('Account Sign-In');
   };
 
   return (

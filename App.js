@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name="Welcome to TSe-Market!"
           component={HomeScreen}
           options={{
             headerTitle: 'TIPians Second-hand e-Market', 
@@ -52,7 +52,7 @@ export default function App() {
         }}
         />
       <Stack.Screen
-        name="NewAccount"
+        name="Create Account"
         component={Account}
         options={{
           headerTitle: 'Create New Account', 
@@ -70,7 +70,7 @@ export default function App() {
         }}
       />
       <Stack.Screen
-        name="SignIn"
+        name="Account Sign-In"
         component={SignIn}
         options={{
           headerTitle: 'Sign-in to your Account', 
@@ -107,7 +107,7 @@ function HomeScreen({ navigation }) {
       <Info />
       <TouchableOpacity
         style={styles.newAccountButton}
-        onPress={() => navigation.navigate('NewAccount')}
+        onPress={() => navigation.navigate('Create Account')}
       >
         <View style={styles.but}>
           <Text style={styles.style2}>New Here? Create an Account</Text>
