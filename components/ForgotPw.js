@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
-export default function NewAccount({ navigation }) {
+export default function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleCreateAccount = () => {
-    navigation.navigate('Account Sign-In');
+  const handleSendCode = () => {
+    // Simulate sending the code to the user's email (replace this with your actual logic)
+    Alert.alert('Code Sent', 'A reset code has been sent to your email.', [
+      {
+        text: 'OK',
+        onPress: () => {
+          // Navigate to the next screen where the user can enter the code
+          navigation.navigate('Reset Password', { email });
+        },
+      },
+    ]);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Create an account</Text>
-      <Text style={styles.text1}>Enter your account details below...</Text>
+      <Text style={styles.header}>Did you forget your password?</Text>
+      <Text style={styles.text1}>Enter your email and wait for the verification code</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -21,26 +28,11 @@ export default function NewAccount({ navigation }) {
           onChangeText={(text) => setEmail(text)}
         />
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setUsername(text)}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry
-        />
-      </View>
       <TouchableOpacity
         style={styles.createButton}
-        onPress={handleCreateAccount}
+        onPress={handleSendCode}
       >
-        <Text style={styles.createButtonText}>Sign Up</Text>
+        <Text style={styles.createButtonText}>Next</Text>
       </TouchableOpacity>
     </View>
   );
@@ -50,8 +42,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#545454',
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
   },
   header: {

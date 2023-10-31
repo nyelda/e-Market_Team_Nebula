@@ -5,10 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Logo from "./components/Logo";
 import Welcome from "./components/Welcome";
 import Input from "./components/Input";
-import Info from "./components/Info";
 import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
+import ForgotPw from "./components/ForgotPw";
 
 
 const Stack = createStackNavigator();
@@ -87,6 +87,24 @@ export default function App() {
           headerTintColor: '#545F71',
         }}
       />
+      <Stack.Screen
+        name="Forgot Password"
+        component={ForgotPw}
+        options={{
+          headerTitle: 'Forgot Password?', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+            fontFamily: 'lucida grande',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+        }}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -104,7 +122,14 @@ function HomeScreen({ navigation }) {
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
-      <Info />
+      <TouchableOpacity
+        style={styles.newAccountButton}
+        onPress={() => navigation.navigate('Forgot Password')}
+      >
+        <View style={styles.but}>
+          <Text style={styles.style2}>Forgot Password?</Text>
+        </View>
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.newAccountButton}
         onPress={() => navigation.navigate('Create Account')}
@@ -113,7 +138,6 @@ function HomeScreen({ navigation }) {
           <Text style={styles.style2}>New Here? Create an Account</Text>
         </View>
       </TouchableOpacity>
-      
     </View>
   );
 }
@@ -134,6 +158,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#545F71',
     marginTop: 10,
+    marginBottom: 10
   },
   loginText: {
     fontSize: 18,
