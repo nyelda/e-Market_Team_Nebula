@@ -10,7 +10,6 @@ import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
 
-
 const Stack = createStackNavigator();
 
 export default function App() {
