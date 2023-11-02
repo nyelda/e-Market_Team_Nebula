@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
+import Search from './components/Search'; 
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,22 @@ export default function App() {
         <Stack.Screen name="Homepage" component={Home} 
         options={{
           headerTitle: 'TSe-Market Homepage', 
+          headerTitleAlign: 'center', 
+          headerTitleStyle: {
+            fontSize: 24, 
+            fontWeight: 'bold', 
+            color: '#545F71', 
+            fontFamily: 'lucida grande', 
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C', 
+          },
+          headerTintColor: '#545F71', 
+        }}
+        />
+        <Stack.Screen name="Search" component={Search} 
+        options={{
+          headerTitle: 'Search for Items', 
           headerTitleAlign: 'center', 
           headerTitleStyle: {
             fontSize: 24, 

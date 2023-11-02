@@ -1,15 +1,5 @@
-//need to edit it
-
 import React, {Component} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  StatusBar,
-  TextInput,
-  Image,
-  Dimensions,
-} from 'react-native';
+import {View, StyleSheet, Text, StatusBar, TextInput, Image, Dimensions,} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 const {width, height} = Dimensions.get('window');
@@ -27,7 +17,7 @@ export default class App extends Component {
   componentDidMount() {
     var data = [
       {
-        name: 'T-Sqauare',
+        name: 'T-Square',
         author: 'Daniel Suyat',
         //img: require('./assets/1.jpg'),
         description:
@@ -148,7 +138,7 @@ const styles = StyleSheet.create({
   header: {
     height: 80,
     width: '100%',
-    backgroundColor: '#ff5b77',
+    backgroundColor: '#545F71',
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
