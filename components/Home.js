@@ -19,7 +19,7 @@ export default function Login() {
       <View style={styles.searchBar}>
         <TextInput
           style={styles.input}
-          placeholder="Find items now..."
+          placeholder="Search"
           onChangeText={(text) => setSearchQuery(text)}
           value={searchQuery}
         />
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    fontStyle: 'italic',
   },
   searchButton: {
     backgroundColor: '#EFD02C',
