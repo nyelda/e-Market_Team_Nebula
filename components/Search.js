@@ -238,12 +238,13 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   modalText2: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 18,
     color: 'black',
     backgroundColor: '#EFD02C',
     textAlign: 'center',
     borderRadius: 5,
+    padding: 10,
   },
 });

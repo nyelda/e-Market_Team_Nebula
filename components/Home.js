@@ -22,7 +22,7 @@ export default function Home() {
           <SearchIcon style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Search</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('Profile')}>
+        <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('User Profile')}>
           <BadgeIcon style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Profile</Text>
         </TouchableOpacity>
