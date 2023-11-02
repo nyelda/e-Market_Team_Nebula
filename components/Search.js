@@ -1,8 +1,19 @@
-import React, {Component} from 'react';
-import {View, StyleSheet, Text, StatusBar, TextInput, Image, Dimensions,} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import React, { Component } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  StatusBar,
+  TextInput,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
+import AddIcon from '@mui/icons-material/Add';
+import Modal from 'react-native-modal';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default class App extends Component {
   constructor() {
@@ -11,8 +22,10 @@ export default class App extends Component {
       query: null,
       dataSource: [],
       dataBackup: [],
+      isModalVisible: false,
     };
   }
+
 
   componentDidMount() {
     var data = [
@@ -86,9 +99,13 @@ export default class App extends Component {
     }
   };
 
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
+
   separator = () => {
     return (
-      <View style={{height: 10, width: '100%', backgroundColor: '#e5e5e5'}} />
+      <View style={{ height: 10, width: '100%', backgroundColor: '#e5e5e5' }} />
     );
   };
 
@@ -99,7 +116,7 @@ export default class App extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#ff5b77" />
         <View style={styles.header}>
           <TextInput
-            placeholder="Enter Text..."
+            placeholder="Search..."
             placeholderTextColor="gray"
             value={this.state.query}
             onChange={this.filterItem.bind(this)}
@@ -109,7 +126,7 @@ export default class App extends Component {
         <FlatList
           data={this.state.dataSource}
           ItemSeparatorComponent={() => this.separator()}
-          renderItem={({item, index}) => {
+          renderItem={({ item, index }) => {
             return (
               <View style={styles.bookContainer}>
                 <Image style={styles.image} source={item.img} />
@@ -121,11 +138,27 @@ export default class App extends Component {
                     {item.description}
                   </Text>
                   <Text style={styles.author}>{item.author}</Text>
+                  <TouchableOpacity
+                    style={styles.iconNav}
+                    onPress={this.toggleModal}
+                  >
+                    <AddIcon style={{ fontSize: 15, color: 'black' }} />
+                  </TouchableOpacity>
                 </View>
               </View>
             );
           }}
         />
+        <Modal isVisible={this.state.isModalVisible}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Item has been added to My Bag</Text>
+              <TouchableOpacity onPress={this.toggleModal}>
+                <Text style={styles.modalText2}>Great!</Text>
+              </TouchableOpacity>
+              </View>
+          </View>
+        </Modal>
       </View>
     );
   }
@@ -168,6 +201,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     color: '#000',
+    fontFamily: 'lucida grande'
   },
   description: {
     fontSize: 16,
@@ -175,5 +209,41 @@ const styles = StyleSheet.create({
   },
   author: {
     fontSize: 16,
+  },
+  iconNav: {
+    backgroundColor: '#EFD02C',
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  
+  modalView: {
+    backgroundColor: '#545F71',
+    padding: 20,
+    borderRadius: 10,
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 18,
+    color: 'white'
+  },
+  modalText2: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 18,
+    color: 'black',
+    backgroundColor: '#EFD02C',
+    textAlign: 'center',
+    borderRadius: 5,
   },
 });

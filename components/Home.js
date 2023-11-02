@@ -16,8 +16,7 @@ export default function Home() {
         <Text style={styles.text1}>Searching for second-hand items will be a click away!</Text>
       </View>
       <View style={styles.bottomIcons}>
-        <TouchableOpacity
-          style={styles.iconNav}
+        <TouchableOpacity style={styles.iconNav}
           onPress={() => navigation.navigate('Search')}
         >
           <SearchIcon style={{ fontSize: 24, color: 'black' }} />
@@ -27,7 +26,9 @@ export default function Home() {
           <BadgeIcon style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Profile</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('MyBag')}>
+        <TouchableOpacity style={styles.iconNav} 
+          onPress={() => navigation.navigate('My Bag')}
+          >
           <LocalMallIcon style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>My Bag</Text>
         </TouchableOpacity>
