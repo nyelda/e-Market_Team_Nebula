@@ -187,15 +187,16 @@ const styles = StyleSheet.create({
   bookContainer: {
     flexDirection: 'row',
     padding: 5,
+    marginBottom: 10,
   },
   image: {
-    height: 150,
-    width: 90,
+    height: 120,
+    width: 80, 
   },
   dataContainer: {
+    flex: 1,
     padding: 10,
-    paddingTop: 5,
-    width: width - 100,
+    maxWidth: width - 100,
   },
   title: {
     fontSize: 17,
@@ -204,11 +205,11 @@ const styles = StyleSheet.create({
     fontFamily: 'lucida grande'
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'gray',
   },
   author: {
-    fontSize: 16,
+    fontSize: 14,
   },
   iconNav: {
     backgroundColor: '#EFD02C',
@@ -226,7 +227,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
   modalView: {
     backgroundColor: '#545F71',
     padding: 20,

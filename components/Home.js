@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     height: 355,
   },
   text1: {
-    fontSize: 20,
+    fontSize: 19,
     color: '#EFD02C',
     marginBottom: 30,
     textAlign: 'center',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   iconNav: {
     backgroundColor: 'white',
     paddingVertical: 10,
-    paddingHorizontal: 25,
+    paddingHorizontal: 28,
     alignItems: 'center',
     justifyContent: 'center',
   },
