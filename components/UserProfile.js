@@ -10,7 +10,7 @@ const UserProfile = () => {
     yearLevel: 'Year Level',
     contactNumber: 'Contact Number',
     email: 'School Email',
-    profileImage: require('../assets/Patrick.jpg'),
+    profileImage: require('../assets/1.jpeg'),
   });
 
   const [savedItems, setSavedItems] = useState({
