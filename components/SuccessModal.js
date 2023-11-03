@@ -10,7 +10,7 @@ const SuccessModal = ({ isVisible, onClose }) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.text}>Logout Successfully!</Text>
+          <Text style={styles.text}>You have been logged out successfully!</Text>
           <TouchableOpacity onPress={onClose}>
                 <Text style={styles.modalText} onPress={() => navigation.navigate('Home')}>Back to Home</Text>
             </TouchableOpacity>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   modalView: {
     backgroundColor: '#EFD02C',
     borderRadius: 10,
-    padding: 20,
+    padding: 15,
     alignItems: 'center',
     elevation: 10,
   },
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold'
   }
 });

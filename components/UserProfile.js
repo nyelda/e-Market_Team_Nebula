@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, Picker } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { View, Text, Image, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { Input } from 'react-native-elements';
 
 const UserProfile = () => {
   const [user, setUser] = useState({
@@ -98,7 +98,9 @@ const UserProfile = () => {
               ))}
             </Picker>
 
-            <Button title="Update Profile" onPress={handleSaveProfile} />
+            <TouchableOpacity style={styles.editUpdateButton} onPress={handleSaveProfile}>
+              <Text style={styles.editUpdateButtonText}>Update Profile</Text>
+            </TouchableOpacity>
           </View>
         ) : (
           <View>
@@ -109,7 +111,10 @@ const UserProfile = () => {
             <Text style={styles.programYear}>
               {user.program}, {user.yearLevel}
             </Text>
-            <Button title="Edit Profile" onPress={() => setEditing(true)} />
+
+            <TouchableOpacity style={styles.editUpdateButton} onPress={() => setEditing(true)}>
+              <Text style={styles.editUpdateButtonText}>Edit Profile</Text>
+            </TouchableOpacity>
             
           </View>
         )}
@@ -223,6 +228,20 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     alignSelf: 'stretch',
+  },
+  editUpdateButton: {
+    backgroundColor: 'gray', 
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    marginBottom: 10,
+  },
+  editUpdateButtonText: {
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 

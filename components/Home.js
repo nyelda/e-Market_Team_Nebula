@@ -80,4 +80,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#545454',
     paddingBottom: 10,
   },
+  goToSettingsButton: {
+    backgroundColor: 'white',
+    padding: 10,
+    alignItems: 'center',
+  },
+  goToSettingsText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
 });

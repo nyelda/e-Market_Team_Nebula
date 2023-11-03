@@ -10,7 +10,7 @@ const ConfirmationModal = ({ isVisible, onCancel, onConfirm }) => {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.text}>Are you sure you want to Logout?</Text>
+          <Text style={styles.text}>Are you sure you want to logout?</Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={onCancel}>
                 <Text style={styles.modalText1}>Cancel</Text>
