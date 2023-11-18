@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import SettingsIcon from '@mui/icons-material/Settings';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import BadgeIcon from '@mui/icons-material/Badge';
-import SearchIcon from '@mui/icons-material/Search';
+//import SettingsIcon from '@mui/icons-material/Settings';
+//import LocalMallIcon from '@mui/icons-material/LocalMall';
+//import BadgeIcon from '@mui/icons-material/Badge';
+//import SearchIcon from '@mui/icons-material/Search';
 
 export default function Home() {
   const navigation = useNavigation();
