@@ -9,10 +9,10 @@ import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
-import Search from "./components/Search"; 
-import MyBag from "./components/MyBag"; 
-import UserProfile from "./components/UserProfile";
-import SettingsScreen from "./components/SettingsScreen";
+//import Search from "./components/Search"; 
+//import MyBag from "./components/MyBag"; 
+//import UserProfile from "./components/UserProfile";
+//import SettingsScreen from "./components/SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -54,7 +54,7 @@ export default function App() {
           headerTintColor: '#545F71', 
         }}
         />
-        <Stack.Screen name="Search" component={Search} 
+        {/*<Stack.Screen name="Search" component={Search} 
         options={{
           headerTitle: 'Search for Items', 
           headerTitleAlign: 'center', 
@@ -117,7 +117,7 @@ export default function App() {
           },
           headerTintColor: '#545F71', 
         }}
-        />
+      />*/}
       <Stack.Screen
         name="Create Account"
         component={CreateAcc}
