@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, TouchableWithoutFeedback, TextInput, } from 'react-native';
 import { Slider } from 'react-native-elements';
 import DeviceInfo from 'react-native-device-info';
-import LogoutIcon from '@mui/icons-material/Logout';
+//import LogoutIcon from '@mui/icons-material/Logout';
 import ConfirmationModal from './ConfirmationModal';
 import SuccessModal from './SuccessModal';
 import Modal from 'react-native-modal';

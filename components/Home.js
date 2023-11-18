@@ -1,10 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-//import SettingsIcon from '@mui/icons-material/Settings';
-//import LocalMallIcon from '@mui/icons-material/LocalMall';
-//import BadgeIcon from '@mui/icons-material/Badge';
-//import SearchIcon from '@mui/icons-material/Search';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
 export default function Home() {
   const navigation = useNavigation();
@@ -16,24 +13,20 @@ export default function Home() {
         <Text style={styles.text1}>Searching for second-hand items will be a click away!</Text>
       </View>
       <View style={styles.bottomIcons}>
-        <TouchableOpacity style={styles.iconNav}
-          onPress={() => navigation.navigate('Search')}
-        >
-          <SearchIcon style={{ fontSize: 24, color: 'black' }} />
+        <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('Search')}>
+          <Icon name="search" style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Search</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('User Profile')}>
-          <BadgeIcon style={{ fontSize: 24, color: 'black' }} />
+          <Icon name="user" style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Profile</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.iconNav} 
-          onPress={() => navigation.navigate('My Bag')}
-          >
-          <LocalMallIcon style={{ fontSize: 24, color: 'black' }} />
+        <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('My Bag')}>
+          <Icon name="shopping-bag" style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>My Bag</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.iconNav} onPress={() => navigation.navigate('Settings')}>
-          <SettingsIcon style={{ fontSize: 24, color: 'black' }} />
+          <Icon name="cog" style={{ fontSize: 24, color: 'black' }} />
           <Text style={styles.iconLabel}>Settings</Text>
         </TouchableOpacity>
       </View>
@@ -79,15 +72,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#545454',
     paddingBottom: 10,
-  },
-  goToSettingsButton: {
-    backgroundColor: 'white',
-    padding: 10,
-    alignItems: 'center',
-  },
-  goToSettingsText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
   },
 });

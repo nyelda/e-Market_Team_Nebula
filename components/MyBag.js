@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
-import Rating from '@mui/material/Rating';
+//import Rating from '@mui/material/Rating';
 
 function App() {
   const items = [
