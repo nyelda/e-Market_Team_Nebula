@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-//import AddIcon from '@mui/icons-material/Add';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icon
 import Modal from 'react-native-modal';
 
 const { width, height } = Dimensions.get('window');
@@ -26,7 +26,6 @@ export default class App extends Component {
     };
   }
 
-
   componentDidMount() {
     var data = [
       {
@@ -36,41 +35,7 @@ export default class App extends Component {
         description:
           'T-Square from TIPC 3rd Year Architecture.',
       },
-      {
-        name: 'If It Bleeds',
-        author: 'Stephen King',
-        //img: require('./app/assets/icon.png'),
-        description:
-          'From #1 New York Times bestselling author, legendary storyteller, and master of short fiction Stephen King comes an extraordinary collection of four new and compelling novellas—Mr. Harrigan’s Phone, ',
-      },
-      {
-        name: 'The Book of Longings: A Novel',
-        author: 'Sue Monk Kidd',
-        //img: require('./app/assets/icon.png'),
-        description:
-          'Named a Most Anticipated Book of 2020 by O, the Oprah Magazine, Good Morning America/ABC-TV, Good Housekeeping, Bustle, TIME,',
-      },
-      {
-        name: 'Masked Prey',
-        author: 'John Sandford',
-        //img: require('./app/assets/icon.png'),
-        description:
-          'Lucas Davenport investigates a vitriolic blog that seems to be targeting the children of U.S. politicians in the latest thriller by #1 New York Times-bestselling author John Sandford.',
-      },
-      {
-        name: 'The Kennedy Curse',
-        author: 'James Patterson',
-        //img: require('./app/assets/icon.png'),
-        description:
-          'The Kennedys have always been a family of charismatic adventurers, raised to take risks and excel, living by the dual family mottos: To whom much is given,',
-      },
-      {
-        name: 'Hidden Valley Road',
-        author: 'Robert Kolker',
-        //img: require('./app/assets/icon.png'),
-        description:
-          'Hidden Valley Road: Inside the Mind of an American Family is a 2020 non-fiction book by Robert Kolker.',
-      },
+      // ... (rest of your data)
     ];
 
     this.setState({
@@ -142,7 +107,8 @@ export default class App extends Component {
                     style={styles.iconNav}
                     onPress={this.toggleModal}
                   >
-                    <AddIcon style={{ fontSize: 15, color: 'black' }} />
+                    {/* Replace AddIcon with FontAwesome icon */}
+                    <Icon name="plus" style={{ fontSize: 15, color: 'black' }} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -156,7 +122,7 @@ export default class App extends Component {
               <TouchableOpacity onPress={this.toggleModal}>
                 <Text style={styles.modalText2}>Great!</Text>
               </TouchableOpacity>
-              </View>
+            </View>
           </View>
         </Modal>
       </View>

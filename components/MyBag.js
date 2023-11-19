@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View, Text, StyleSheet } from 'react-native';
-//import Rating from '@mui/material/Rating';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function App() {
   const items = [
@@ -45,7 +45,10 @@ function App() {
     <View style={styles.itemContainer}>
       <Text style={styles.itemName}>{item.name}</Text>
       <Text>Price: {item.price}</Text>
-      <Rating name="rating" value={item.rating} precision={0.1} readOnly />
+      <View style={styles.ratingContainer}>
+        <Icon name="star" size={20} color="gold" />
+        <Text>{item.rating}</Text>
+      </View>
       <Text>Stock: {item.stock}</Text>
       <Text>Seller: {item.seller}</Text>
     </View>
@@ -74,10 +77,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   text: {
     fontSize: 20, 
     fontWeight: 'bold',
-    fontFamily: 'lucida grande'
+    fontFamily: 'lucida grande',
   }
 });
 
