@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome icon
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Modal from 'react-native-modal';
 
 const { width, height } = Dimensions.get('window');
@@ -31,11 +31,45 @@ export default class App extends Component {
       {
         name: 'T-Square',
         author: 'Daniel Suyat',
-        //img: require('./assets/1.jpg'),
+        img: require('../assets/1.jpg'),
         description:
           'T-Square from TIPC 3rd Year Architecture.',
       },
-      // ... (rest of your data)
+      {
+        name: 'Protractor',
+        author: 'Nicole Dino',
+        img: require('../assets/2.jpg'),
+        description:
+          'Protractor from TIPC 2rd Year Architecture.',
+      },
+      {
+        name: 'School Uniform Male',
+        author: 'Kenneth Cordero',
+        //img: require('../assets/3.jpg'),
+        description:
+          'School Uniform from TIPC 4th Year Computer Engineering.',
+      },
+      {
+        name: 'PE Uniform Male',
+        author: 'Meljune Go',
+        img: require('../assets/4.jpg'),
+        description:
+          'Protractor from TIPC 4th Year Computer Science.',
+      },
+      {
+        name: 'Predator Laptop',
+        author: 'Johnny Eniceo',
+        img: require('../assets/5.jpg'),
+        description:
+          'Predator Laptop from TIPC 4th Year Information Technology.',
+      },
+      {
+        name: 'Casio fx-500ES',
+        author: 'Angelica Cruz',
+        img: require('../assets/6.jpg'),
+        description:
+          'Casio fx-500ES from TIPC 1st Year BS Mathematics.',
+      },
     ];
 
     this.setState({
@@ -81,7 +115,7 @@ export default class App extends Component {
         <StatusBar barStyle="light-content" backgroundColor="#ff5b77" />
         <View style={styles.header}>
           <TextInput
-            placeholder="Search..."
+            placeholder="Search Items Here"
             placeholderTextColor="gray"
             value={this.state.query}
             onChange={this.filterItem.bind(this)}
@@ -156,8 +190,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    height: 120,
-    width: 80, 
+    height: 130,
+    width: 150, 
   },
   dataContainer: {
     flex: 1,

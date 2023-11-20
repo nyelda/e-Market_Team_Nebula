@@ -26,7 +26,10 @@ const UserProfile = () => {
       { id: 5, name: 'Book 1' },
       { id: 6, name: 'Book 2' },
     ],
-    // Add more categories and items here
+    uniform: [
+      { id: 7, name: 'PE Uniform' },
+      { id: 8, name: 'School Uniform' },
+    ],
   });
 
   const [editing, setEditing] = useState(false);

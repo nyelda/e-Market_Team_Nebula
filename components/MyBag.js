@@ -5,39 +5,46 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function App() {
   const items = [
     {
-      name: 'Rotring T-Square',
+      name: 'T-Square',
       price: '₱450.00',
       rating: 4.5,
       stock: 1,
-      seller: 'Alexander Pineda',
+      seller: 'Daniel Suyat',
     },
     {
-      name: 'PE Uniform Female',
+      name: 'PE Uniform Male',
       price: '₱275.50',
       rating: 3.9,
       stock: 3,
-      seller: 'Eliza Santos',
+      seller: 'Meljune Go',
     },
     {
-      name: 'Casio ES-5198',
+      name: 'Casio fx-500ES',
       price: '₱623.79',
       rating: 4.3,
       stock: 1,
       seller: 'Angelica Cruz',
     },
     {
-      name: 'Rotring Drafting Pen',
-      price: '₱899.67',
+      name: 'Protractor',
+      price: '₱100.67',
       rating: 4.8,
       stock: 6,
-      seller: 'Peggy Dimacasalong',
+      seller: 'Nicole Dino',
     },
     {
-      name: 'Aquaflask Limited Edition',
+      name: 'School Uniform Male',
       price: '₱999.01',
       rating: 3.3,
       stock: 10,
-      seller: 'Aaron Burlaloy',
+      seller: 'Kenneth Cordero',
+    },
+    {
+      name: 'Predator Gaming Laptop',
+      price: '₱80,000.00',
+      rating: 4.9,
+      stock: 2,
+      seller: 'Johnny Eniceo',
     },
   ];
 

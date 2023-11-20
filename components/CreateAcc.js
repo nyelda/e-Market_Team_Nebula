@@ -13,7 +13,7 @@ export default function NewAccount({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Create an account</Text>
-      <Text style={styles.text1}>Enter your account details below...</Text>
+      <Text style={styles.text1}>Enter your account details below:</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email</Text>
         <TextInput

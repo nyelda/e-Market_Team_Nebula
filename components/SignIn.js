@@ -12,7 +12,7 @@ export default function NewAccount({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Welcome, dear TIPian!</Text>
-      <Text style={styles.text1}>Log in below and enter your credentials...</Text>
+      <Text style={styles.text1}>Log in below and enter your credentials:</Text>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Email/Username</Text>
         <TextInput

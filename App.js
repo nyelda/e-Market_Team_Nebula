@@ -23,7 +23,7 @@ export default function App() {
             headerTitle: 'TIPians Second-hand e-Market', 
             headerTitleAlign: 'center', 
             headerTitleStyle: {
-              fontSize: 24, 
+              fontSize: 23, 
               fontWeight: 'bold', 
               color: '#545F71', 
               fontFamily: 'lucida grande', 
@@ -144,7 +144,7 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#545454',
+    backgroundColor: '#565857',
     alignItems: 'center',
     justifyContent: 'center',
   },
