@@ -2,16 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Search from '../components/Search';
-import UserProfile from "../components/UserProfile";
-import MyBag from "../components/MyBag";
-//import SettingsScreen from "../components/SettingsScreen"
+import UserProfile from '../components/UserProfile';
+import MyBag from '../components/MyBag';
+import Settings from "./Settings";
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }) {
   const goToSearch = () => {
@@ -26,92 +23,28 @@ function HomeScreen({ navigation }) {
     navigation.navigate('MyBag');
   };
 
+  const goToSettings = () => {
+    navigation.navigate('Settings');
+  };
+
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/TSe-Market LOGO FINAL.png')} style={styles.img} />
+      <Image source={require('../assets/TSeMarketLogo.jpg')} style={styles.img} />
       <Text style={styles.text1}>Searching for second-hand items will be a click away!</Text>
       <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
-        <Ionicons name="search" size={30} color="#EFD02C" />
+        <Icon name="search" size={30} color="#EFD02C" />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToUserProfile} style={styles.searchIcon}>
-        <Ionicons name="person-outline" size={30} color="#EFD02C" />
+        <Icon name="person-outline" size={30} color="#EFD02C" />
       </TouchableOpacity>
       <TouchableOpacity onPress={goToMyBag} style={styles.searchIcon}>
-        <Ionicons name="basket-outline" size={30} color="#EFD02C" />
+        <Icon name="basket-outline" size={30} color="#EFD02C" />
+      </TouchableOpacity>
+      {/* Add Settings icon with onPress handler */}
+      <TouchableOpacity onPress={goToSettings} style={styles.settingsIcon}>
+        <Icon name="cog" size={30} color="#EFD02C" />
       </TouchableOpacity>
     </View>
-  );
-}
-
-function UserProfileScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>User Profile Screen</Text>
-      {/* Add relevant content for the user profile */}
-    </View>
-  );
-}
-
-function MyBagScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>My Bag Screen</Text>
-      {/* Add relevant content for the My Bag screen */}
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-}
-
-function BottomTabNavigator() {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#545F71',
-        inactiveTintColor: 'gray',
-        labelStyle: {
-          fontSize: 12,
-          fontWeight: 'bold',
-        },
-        style: {
-          backgroundColor: '#EFD02C',
-        },
-      }}
-    >
-      <Tab.Screen
-        name="User Profile"
-        component={UserProfileScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="user" style={{ fontSize: size, color: color }} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="My Bag"
-        component={MyBagScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="shopping-bag" style={{ fontSize: size, color: color }} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="cog" style={{ fontSize: size, color: color }} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
   );
 }
 
@@ -182,10 +115,20 @@ export default function Home() {
         }}
       />
       <Stack.Screen
-        name="BottomTabs"
-        component={BottomTabNavigator}
+        name="Settings"
+        component={Settings}
         options={{
-          headerShown: false,
+          headerTitle: 'Settings',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+            fontFamily: 'lucida grande',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
         }}
       />
     </Stack.Navigator>
@@ -211,6 +154,9 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   searchIcon: {
+    marginTop: 20,
+  },
+  settingsIcon: {
     marginTop: 20,
   },
 });

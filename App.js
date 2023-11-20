@@ -9,10 +9,6 @@ import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
-//import Search from "./components/Search"; 
-//import MyBag from "./components/MyBag"; 
-//import UserProfile from "./components/UserProfile";
-//import SettingsScreen from "./components/SettingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -54,70 +50,6 @@ export default function App() {
           headerTintColor: '#545F71', 
         }}
         />
-        {/*<Stack.Screen name="Search" component={Search} 
-        options={{
-          headerTitle: 'Search for Items', 
-          headerTitleAlign: 'center', 
-          headerTitleStyle: {
-            fontSize: 24, 
-            fontWeight: 'bold', 
-            color: '#545F71', 
-            fontFamily: 'lucida grande', 
-          },
-          headerStyle: {
-            backgroundColor: '#EFD02C', 
-          },
-          headerTintColor: '#545F71', 
-        }}
-        />
-        <Stack.Screen name="My Bag" component={MyBag} 
-        options={{
-          headerTitle: 'My Bag', 
-          headerTitleAlign: 'center', 
-          headerTitleStyle: {
-            fontSize: 24, 
-            fontWeight: 'bold', 
-            color: '#545F71', 
-            fontFamily: 'lucida grande', 
-          },
-          headerStyle: {
-            backgroundColor: '#EFD02C', 
-          },
-          headerTintColor: '#545F71', 
-        }}
-        />
-        <Stack.Screen name="User Profile" component={UserProfile} 
-        options={{
-          headerTitle: 'Edit your Profile', 
-          headerTitleAlign: 'center', 
-          headerTitleStyle: {
-            fontSize: 24, 
-            fontWeight: 'bold', 
-            color: '#545F71', 
-            fontFamily: 'lucida grande', 
-          },
-          headerStyle: {
-            backgroundColor: '#EFD02C', 
-          },
-          headerTintColor: '#545F71', 
-        }}
-        />
-        <Stack.Screen name="Settings" component={SettingsScreen} 
-        options={{
-          headerTitle: 'Check your Settings', 
-          headerTitleAlign: 'center', 
-          headerTitleStyle: {
-            fontSize: 24, 
-            fontWeight: 'bold', 
-            color: '#545F71', 
-            fontFamily: 'lucida grande', 
-          },
-          headerStyle: {
-            backgroundColor: '#EFD02C', 
-          },
-          headerTintColor: '#545F71', 
-        }}
-      />*/}
       <Stack.Screen
         name="Create Account"
         component={CreateAcc}

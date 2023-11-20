@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, TouchableWithoutFeedback, TextInput, } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, TouchableWithoutFeedback, TextInput, ScrollView } from 'react-native';
 import { Slider } from 'react-native-elements';
-import DeviceInfo from 'react-native-device-info';
-//import LogoutIcon from '@mui/icons-material/Logout';
+import { Constants } from 'expo-constants'; // Import Constants from Expo
+//mport LogoutIcon from '@mui/icons-material/Logout';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ConfirmationModal from './ConfirmationModal';
 import SuccessModal from './SuccessModal';
 import Modal from 'react-native-modal';
 
-
-const SettingsScreen = ({ navigation }) => {
+const Settings = ({ navigation }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
-  const [appVersion, setAppVersion] = useState('');
   const [showAppVersion, setShowAppVersion] = useState(false);
   const [showPolicies, setShowPolicies] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [userComment, setUserComment] = useState('');
-  const [selectedRating, setSelectedRating] = useState(1); 
+  const [selectedRating, setSelectedRating] = useState(1);
   const [isFeedbackMessageModalVisible, setIsFeedbackMessageModalVisible] = useState(false);
-
 
   const toggleDarkMode = () => {
     setDarkModeEnabled((prevDarkMode) => !prevDarkMode);
@@ -50,11 +48,6 @@ const SettingsScreen = ({ navigation }) => {
     setIsSuccessModalVisible(false);
   };
 
-  useEffect(() => {
-    const version = DeviceInfo.getVersion();
-    setAppVersion(version);
-  }, []);
-
   const toggleAppVersion = () => {
     setShowAppVersion((prev) => !prev);
   };
@@ -71,26 +64,22 @@ const SettingsScreen = ({ navigation }) => {
     console.log('User Comment:', userComment);
     setUserComment('');
     setShowCommentBox(false);
-    setIsFeedbackMessageModalVisible(true); 
-  }; 
+    setIsFeedbackMessageModalVisible(true);
+  };
 
   return (
     <View style={[styles.container, darkModeEnabled && styles.darkModeContainer]}>
-      <Text style={styles.header}>Settings</Text>
       <TouchableWithoutFeedback onPress={toggleAppVersion}>
         <View style={styles.appVersionContainer}>
           <Text style={styles.appVersionLabel}>App Version</Text>
           <Text style={styles.appVersionValue}>
-            {showAppVersion ? appVersion : 'Click to Show'}
+            {showAppVersion ? Constants.manifest.version : 'Click to Show'}
           </Text>
         </View>
       </TouchableWithoutFeedback>
       <View style={styles.settingRow}>
         <Text style={styles.settingText}>Enable Notifications</Text>
-        <Switch
-          value={notificationsEnabled}
-          onValueChange={toggleNotifications}
-        />
+        <Switch value={notificationsEnabled} onValueChange={toggleNotifications} />
       </View>
       <View style={styles.settingRow}>
         <Text style={styles.settingText}>Dark Mode</Text>
@@ -100,11 +89,12 @@ const SettingsScreen = ({ navigation }) => {
         <Text style={styles.policiesButtonText}>View App Policies</Text>
       </TouchableOpacity>
       {showPolicies && (
-        <View style={styles.policiesContainer}>
-          <Text style={styles.policiesContainer}>IMPORTANT: Sellers should provide the right items to consumers. 
+        <ScrollView style={styles.policiesContainer}>
+          <Text style={styles.policiesText}>
+            IMPORTANT: Sellers should provide the right items to consumers.
             Consumers should not scam the sellers into buying the items.
           </Text>
-        </View>
+        </ScrollView>
       )}
       <TouchableOpacity style={styles.feedbackButton} onPress={toggleCommentBox}>
         <Text style={styles.feedbackButtonText}>Send your Feedback</Text>
@@ -119,8 +109,10 @@ const SettingsScreen = ({ navigation }) => {
           />
           <View style={styles.sliderAndSubmitContainer}>
             <View style={styles.ratingContainer}>
-                <Text style={styles.ratingLabel}> ⭐ ⭐ ⭐ Rate TSe-Market! (1-5)  ⭐ ⭐ ⭐ </Text>
-                <Slider
+              <Text style={styles.ratingLabel}>
+                ⭐ ⭐ ⭐ Rate TSe-Market! (1-5) ⭐ ⭐ ⭐
+              </Text>
+              <Slider
                 minimumValue={1}
                 maximumValue={5}
                 step={1}
@@ -131,32 +123,37 @@ const SettingsScreen = ({ navigation }) => {
                 trackStyle={styles.sliderTrack}
                 minimumTrackTintColor="#EFD02C"
                 maximumTrackTintColor="gray"
-                />
-                <Text style={styles.ratingValue}>{selectedRating}</Text>
+              />
+              <Text style={styles.ratingValue}>{selectedRating}</Text>
             </View>
-            <TouchableOpacity style={styles.commentSubmitButton} onPress={submitComment}>
-                <Text style={styles.commentSubmitButtonText}>Submit</Text>
+            <TouchableOpacity
+              style={styles.commentSubmitButton}
+              onPress={submitComment}
+            >
+              <Text style={styles.commentSubmitButtonText}>Submit</Text>
             </TouchableOpacity>
-            </View>
+          </View>
         </View>
       )}
       <Modal
         isVisible={isFeedbackMessageModalVisible}
         onBackdropPress={() => setIsFeedbackMessageModalVisible(false)}
-        >
+      >
         <View style={styles.feedbackModal}>
-            <Text style={styles.feedbackModalText}>Thanks! Your feedback has been recorded!</Text>
-            <TouchableOpacity
+          <Text style={styles.feedbackModalText}>
+            Thanks! Your feedback has been recorded!
+          </Text>
+          <TouchableOpacity
             style={styles.closeFeedbackModalButton}
             onPress={() => setIsFeedbackMessageModalVisible(false)}
-            >
+          >
             <Text style={styles.closeFeedbackModalButtonText}>Close</Text>
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
       </Modal>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.iconNav} onPress={saveSettings}>
-          <LogoutIcon style={{ fontSize: 30, color: 'black' }} />
+          <Icon name="logout" size={30} color="black" />
           <Text style={styles.iconLabel}>LOGOUT</Text>
         </TouchableOpacity>
       </View>
@@ -165,11 +162,7 @@ const SettingsScreen = ({ navigation }) => {
         onCancel={onCancelModal}
         onConfirm={onConfirmModal}
       />
-      <SuccessModal
-        isVisible={isSuccessModalVisible}
-        onClose={onCloseSuccessModal}
-      />
-      
+      <SuccessModal isVisible={isSuccessModalVisible} onClose={onCloseSuccessModal} />
     </View>
   );
 };
@@ -182,14 +175,6 @@ const styles = StyleSheet.create({
   darkModeContainer: {
     backgroundColor: '#545454',
   },
-  header: {
-    fontSize: 40,
-    marginBottom: 20,
-    textAlign: 'center',
-    color: '#EFD02C',
-    fontWeight: 'bold',
-    fontFamily: 'lucida grande'
-  },
   appVersionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -199,7 +184,7 @@ const styles = StyleSheet.create({
   appVersionLabel: {
     fontSize: 18,
     marginRight: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   appVersionValue: {
     fontSize: 18,
@@ -214,10 +199,10 @@ const styles = StyleSheet.create({
   },
   settingText: {
     fontSize: 18,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   policiesButton: {
-    backgroundColor: 'lightgray', 
+    backgroundColor: '#D3D3D3',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -231,39 +216,39 @@ const styles = StyleSheet.create({
   },
   policiesContainer: {
     padding: 10,
-    backgroundColor: 'white', 
+    backgroundColor: 'white',
     borderRadius: 5,
   },
-  policiesContainer: {
+  policiesText: {
     fontSize: 15,
     color: 'black',
     fontStyle: 'italic',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   commentInput: {
     fontSize: 16,
     color: 'black',
     fontStyle: 'italic',
     marginBottom: 20,
-    borderColor: 'lightgray',
-    borderWidth: 3
+    borderColor: '#D3D3D3',
+    borderWidth: 3,
   },
-  commentSubmitButtonText:{
+  commentSubmitButtonText: {
     fontSize: 17,
     color: 'black',
     fontWeight: 'bold',
   },
-  commentSubmitButton:{
+  commentSubmitButton: {
     backgroundColor: '#EFD02C',
-    paddingVertical: 15, 
-    paddingHorizontal: 5, 
+    paddingVertical: 15,
+    paddingHorizontal: 5,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 5
+    marginTop: 5,
   },
   feedbackButton: {
-    backgroundColor: 'lightgray', 
+    backgroundColor: 'lightgray',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -292,7 +277,7 @@ const styles = StyleSheet.create({
   iconLabel: {
     textAlign: 'center',
     fontSize: 15,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   ratingContainer: {
     marginBottom: 10,
@@ -300,7 +285,7 @@ const styles = StyleSheet.create({
   ratingLabel: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 20
+    marginTop: 20,
   },
   ratingValue: {
     fontSize: 18,
@@ -310,16 +295,16 @@ const styles = StyleSheet.create({
   sliderThumb: {
     width: 20,
     height: 20,
-    backgroundColor: 'white', 
+    backgroundColor: 'white',
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#EFD02C', 
+    borderColor: '#EFD02C',
   },
   sliderTrack: {
     height: 5,
   },
   sliderAndSubmitContainer: {
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   feedbackModal: {
     backgroundColor: 'white',
@@ -346,4 +331,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default Settings;

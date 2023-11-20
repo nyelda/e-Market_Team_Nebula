@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <View style={styles.innerContainer}>
       <Image
-        source={require('../assets/TSe-Market LOGO FINAL.png')}  
+        source={require('../assets/TSeMarketLogo.jpg')}  
         style={styles.img}/>    
     </View>
   )
