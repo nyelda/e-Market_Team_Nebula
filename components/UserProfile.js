@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Input } from 'react-native-elements';
+import { Picker } from '@react-native-picker/picker';
 
 const UserProfile = () => {
   const [user, setUser] = useState({
@@ -48,142 +49,149 @@ const UserProfile = () => {
   ];
   const yearLevels = ['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year'];
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.profileContainer}>
-        <Image source={user.profileImage} style={styles.profileImage} />
+  const savedItemsData = Object.entries(savedItems).map(([category, items]) => ({
+    category,
+    items,
+  }));
 
-        {editing ? (
-          <View>
-            <Input
-              label="Username"
-              placeholder="Username"
-              value={user.username}
-              onChangeText={(text) => setUser({ ...user, username: text })}
-            />
-            <Input
-              label="Full Name"
-              placeholder="Full Name"
-              value={user.fullName}
-              onChangeText={(text) => setUser({ ...user, fullName: text })}
-            />
-            <Input
-              label="Contact Number"
-              placeholder="Contact Number"
-              value={user.contactNumber}
-              onChangeText={(text) => setUser({ ...user, contactNumber: text })}
-            />
-            <Input
-              label="School Email"
-              placeholder="username@example.edu.ph"
-              value={user.email}
-              onChangeText={(text) => setUser({ ...user, email: text })}
-            />
-            {/* Program Dropdown */}
-            <Text>Select Program:</Text>
-            <Picker
-              selectedValue={user.program}
-              onValueChange={(itemValue) => setUser({ ...user, program: itemValue })}
-            >
-              {programs.map((program, index) => (
-                <Picker.Item key={index} label={program} value={program} />
-              ))}
-            </Picker>
-
-            {/* Year Level Dropdown */}
-            <Text>Select Year Level:</Text>
-            <Picker
-              selectedValue={user.yearLevel}
-              onValueChange={(itemValue) => setUser({ ...user, yearLevel: itemValue })}
-            >
-              {yearLevels.map((year, index) => (
-                <Picker.Item key={index} label={year} value={year} />
-              ))}
-            </Picker>
-
-            <TouchableOpacity style={styles.editUpdateButton} onPress={handleSaveProfile}>
-              <Text style={styles.editUpdateButtonText}>Update Profile</Text>
-            </TouchableOpacity>
+  const renderItem = ({ item }) => (
+    <View key={item.category}>
+      <Text style={styles.savedItemsCategory}>{item.category}:</Text>
+      <View style={styles.bulletList}>
+        {item.items.map((savedItem) => (
+          <View key={savedItem.id} style={styles.bulletListItem}>
+            <Text style={styles.bulletPoint}>➜</Text>
+            <Text style={styles.savedItem}>{savedItem.name}</Text>
           </View>
-        ) : (
-          <View>
-            <Text style={styles.userName}>{user.username}</Text>
-            <Text style={styles.fullName}>{user.fullName}</Text>
-            <Text style={styles.contactNumber}>{user.contactNumber}</Text>
-            <Text style={styles.email}>{user.email}</Text>
-            <Text style={styles.programYear}>
-              {user.program}, {user.yearLevel}
-            </Text>
-
-            <TouchableOpacity style={styles.editUpdateButton} onPress={() => setEditing(true)}>
-              <Text style={styles.editUpdateButtonText}>Edit Profile</Text>
-            </TouchableOpacity>
-            
-          </View>
-        )}
-        <View style={styles.separator}></View>
-
-        <View style={styles.savedItemsContainer}>
-            <Text style={styles.savedItemsHeader}>Your Saved Items:</Text>
-            {Object.keys(savedItems).map((category) => (
-                <View key={category}>
-                <Text style={styles.savedItemsCategory}>{category}:</Text>
-                <View style={styles.bulletList}>
-                    {savedItems[category].map((item) => (
-                    <View key={item.id} style={styles.bulletListItem}>
-                        <Text style={styles.bulletPoint}>➜</Text>
-                        <Text style={styles.savedItem}>{item.name}</Text>
-                    </View>
-                    ))}
-                </View>
-                </View>
-            ))}
-        </View>
+        ))}
       </View>
     </View>
+  );
+
+  return (
+    <FlatList
+    data={savedItemsData}
+    renderItem={renderItem}
+    keyExtractor={(item) => item.category}
+    ListHeaderComponent={() => (
+      <View style={styles.container}>
+        <Image source={user.profileImage} style={styles.profileImage} />
+
+          {editing ? (
+            <>
+              <Input
+                label="Username"
+                placeholder="Username"
+                value={user.username}
+                onChangeText={(text) => setUser({ ...user, username: text })}
+              />
+              <Input
+                label="Full Name"
+                placeholder="Full Name"
+                value={user.fullName}
+                onChangeText={(text) => setUser({ ...user, fullName: text })}
+              />
+              <Input
+                label="Contact Number"
+                placeholder="Contact Number"
+                value={user.contactNumber}
+                onChangeText={(text) => setUser({ ...user, contactNumber: text })}
+              />
+              <Input
+                label="School Email"
+                placeholder="username@example.edu.ph"
+                value={user.email}
+                onChangeText={(text) => setUser({ ...user, email: text })}
+              />
+
+              {/* Program Dropdown */}
+              <View key="programPicker">
+                <Text>Select Program:</Text>
+                <Picker
+                  selectedValue={user.program}
+                  onValueChange={(itemValue) => setUser({ ...user, program: itemValue })}
+                >
+                  {programs.map((program, index) => (
+                    <Picker.Item key={index} label={program} value={program} />
+                  ))}
+                </Picker>
+              </View>
+
+              {/* Year Level Dropdown */}
+              <View key="yearLevelPicker">
+                <Text>Select Year Level:</Text>
+                <Picker
+                  selectedValue={user.yearLevel}
+                  onValueChange={(itemValue) => setUser({ ...user, yearLevel: itemValue })}
+                >
+                  {yearLevels.map((year, index) => (
+                    <Picker.Item key={index} label={year} value={year} />
+                  ))}
+                </Picker>
+              </View>
+
+              <TouchableOpacity style={styles.editUpdateButton} onPress={handleSaveProfile}>
+                <Text style={styles.editUpdateButtonText}>Update Profile</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
+              <Text style={styles.userName}>{user.username}</Text>
+              <Text style={styles.fullName}>{user.fullName}</Text>
+              <Text style={styles.contactNumber}>{user.contactNumber}</Text>
+              <Text style={styles.email}>{user.email}</Text>
+              <Text style={styles.programYear}>
+                {user.program}, {user.yearLevel}
+              </Text>
+
+              <TouchableOpacity style={styles.editUpdateButton} onPress={() => setEditing(true)}>
+                <Text style={styles.editUpdateButtonText}>Edit Profile</Text>
+              </TouchableOpacity>
+            </>
+          )}
+          <View style={styles.separator}></View>
+          <Text style={styles.savedItemsListHeader}>Your Saved Items:</Text>
+        </View>
+      )}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      marginLeft: 20,
-    },
-    profileContainer: {
-      alignItems: 'center',
-      borderStyle: 'square',
-    },
-    profileImage: {
-        width: 125, 
-        height: 125, 
-        borderRadius: 65, 
-        marginTop: 20,
-        marginRight: 28,
-        marginBottom: 10, 
-      },
+  container: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 20,
+  },
+  profileImage: {
+    width: 125,
+    height: 125,
+    borderRadius: 65,
+    marginTop: 20,
+    marginRight: 28,
+    marginBottom: 10,
+  },
   userName: {
     fontSize: 20,
     fontWeight: 'bold',
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   fullName: {
     fontSize: 20,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   contactNumber: {
     fontSize: 20,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   email: {
     fontSize: 20,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   programYear: {
     fontSize: 20,
     fontStyle: 'italic',
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   savedItemsContainer: {
     marginTop: 20,
@@ -191,42 +199,42 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     backgroundColor: 'lightgray',
-    alignItems: 'flex-start', 
+    alignItems: 'center', 
     justifyContent: 'flex-start', 
   },
   savedItemsHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    paddingBottom: 8
   },
   savedItemsCategory: {
     fontSize: 17,
     fontWeight: 'bold',
+    marginLeft: 15,
   },
   savedItem: {
     fontSize: 16,
-    paddingBottom: 5
+    paddingBottom: 3,
   },
   bulletList: {
-    marginLeft: 20, 
+    marginLeft: 20,
   },
   bulletListItem: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   bulletPoint: {
-    fontSize: 18, 
-    marginRight: 5, 
+    fontSize: 18,
+    marginRight: 5,
   },
   separator: {
     borderBottomWidth: 3,
-    borderBottomColor: '#ccc',
+    borderBottomColor: 'gray', 
     marginTop: 10,
     marginBottom: 10,
-    alignSelf: 'stretch',
+    width: '80%',
   },
   editUpdateButton: {
-    backgroundColor: 'gray', 
+    backgroundColor: 'gray',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -238,6 +246,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     fontWeight: 'bold',
+  },
+  savedItemsListHeader: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
+    marginBottom: 10,
+    alignItems: 'flex-start',
   },
 });
 
