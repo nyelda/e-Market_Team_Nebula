@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 import Search from '../components/Search';
 import UserProfile from '../components/UserProfile';
 import MyBag from '../components/MyBag';
@@ -29,24 +30,27 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/TSeMarketLogo.jpg')} style={styles.img} />
-      <Text style={styles.text1}>Searching for second-hand items will be a click away!</Text>
-      <TouchableOpacity onPress={goToSearch} style={styles.searchIcon}>
-        <Icon name="search" size={30} color="#EFD02C" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={goToUserProfile} style={styles.searchIcon}>
-        <Icon name="person-outline" size={30} color="#EFD02C" />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={goToMyBag} style={styles.searchIcon}>
-        <Icon name="basket-outline" size={30} color="#EFD02C" />
-      </TouchableOpacity>
-      {/* Add Settings icon with onPress handler */}
-      <TouchableOpacity onPress={goToSettings} style={styles.settingsIcon}>
-        <Icon name="cog" size={30} color="#EFD02C" />
-      </TouchableOpacity>
+      <View style={styles.logoContainer}>
+        <Image source={require('../assets/TSeMarketLogo.jpg')} style={styles.img} />
+        <Text style={styles.text1}>Searching for second-hand items will be a click away!</Text>
+      </View>
+      <View style={styles.iconContainer}>
+        <TouchableOpacity onPress={goToSearch} style={styles.icon}>
+          <Icon2 name="shopping-search" size={30} color="#EFD02C" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToUserProfile} style={styles.icon}>
+          <Icon2 name="account-edit-outline" size={30} color="#EFD02C" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToMyBag} style={styles.icon}>
+          <Icon2 name="bag-personal-outline" size={30} color="#EFD02C" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToSettings} style={styles.icon}>
+          <Icon name="settings-outline" size={30} color="#EFD02C" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
-}
+};
 
 export default function Home() {
   const navigation = useNavigation();
@@ -70,7 +74,6 @@ export default function Home() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -88,7 +91,6 @@ export default function Home() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -106,7 +108,6 @@ export default function Home() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -124,7 +125,6 @@ export default function Home() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -139,24 +139,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#565857',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 90,
   },
   img: {
     width: 355,
     height: 355,
   },
   text1: {
-    fontSize: 19,
+    fontSize: 16,
     color: '#EFD02C',
     marginBottom: 30,
     textAlign: 'center',
     fontStyle: 'italic',
   },
-  searchIcon: {
-    marginTop: 20,
+  iconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    position: 'absolute',
+    bottom: 20,
+    width: '100%',
   },
-  settingsIcon: {
-    marginTop: 20,
+  icon: {
+    marginBottom: 10,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 15,
+    width: 80, 
+    alignItems: 'center',
   },
 });
+

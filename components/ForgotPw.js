@@ -5,12 +5,10 @@ export default function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('');
 
   const handleSendCode = () => {
-    // Simulate sending the code to the user's email (replace this with your actual logic)
     Alert.alert('Code Sent', 'A reset code has been sent to your email.', [
       {
         text: 'OK',
         onPress: () => {
-          // Navigate to the next screen where the user can enter the code
           navigation.navigate('Reset Password', { email });
         },
       },

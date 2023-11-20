@@ -166,27 +166,22 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'lucida grande',
     paddingBottom: 5
   },
   fullName: {
     fontSize: 20,
-    fontFamily: 'lucida grande',
     paddingBottom: 5
   },
   contactNumber: {
     fontSize: 20,
-    fontFamily: 'lucida grande',
     paddingBottom: 5
   },
   email: {
     fontSize: 20,
-    fontFamily: 'lucida grande',
     paddingBottom: 5
   },
   programYear: {
     fontSize: 20,
-    fontFamily: 'lucida grande',
     fontStyle: 'italic',
     paddingBottom: 5
   },
@@ -202,13 +197,11 @@ const styles = StyleSheet.create({
   savedItemsHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    fontFamily: 'lucida grande',
     paddingBottom: 8
   },
   savedItemsCategory: {
     fontSize: 17,
     fontWeight: 'bold',
-    fontFamily: 'lucida grande',
   },
   savedItem: {
     fontSize: 16,

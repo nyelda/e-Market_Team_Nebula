@@ -202,7 +202,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
     color: '#000',
-    fontFamily: 'lucida grande'
   },
   description: {
     fontSize: 14,

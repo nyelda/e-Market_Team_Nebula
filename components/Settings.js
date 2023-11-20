@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, TouchableWithoutFeedback, TextInput, ScrollView } from 'react-native';
 import { Slider } from 'react-native-elements';
-import { Constants } from 'expo-constants'; // Import Constants from Expo
-//mport LogoutIcon from '@mui/icons-material/Logout';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ConfirmationModal from './ConfirmationModal';
 import SuccessModal from './SuccessModal';
@@ -13,7 +11,6 @@ const Settings = ({ navigation }) => {
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
-  const [showAppVersion, setShowAppVersion] = useState(false);
   const [showPolicies, setShowPolicies] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [userComment, setUserComment] = useState('');
@@ -48,10 +45,6 @@ const Settings = ({ navigation }) => {
     setIsSuccessModalVisible(false);
   };
 
-  const toggleAppVersion = () => {
-    setShowAppVersion((prev) => !prev);
-  };
-
   const togglePolicies = () => {
     setShowPolicies((prev) => !prev);
   };
@@ -69,14 +62,10 @@ const Settings = ({ navigation }) => {
 
   return (
     <View style={[styles.container, darkModeEnabled && styles.darkModeContainer]}>
-      <TouchableWithoutFeedback onPress={toggleAppVersion}>
-        <View style={styles.appVersionContainer}>
-          <Text style={styles.appVersionLabel}>App Version</Text>
-          <Text style={styles.appVersionValue}>
-            {showAppVersion ? Constants.manifest.version : 'Click to Show'}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
+      <View style={styles.appVersionContainer}>
+        <Text style={styles.appVersionLabel}>App Version</Text>
+        <Text style={styles.appVersionValue}>v1.0.0</Text>
+      </View>
       <View style={styles.settingRow}>
         <Text style={styles.settingText}>Enable Notifications</Text>
         <Switch value={notificationsEnabled} onValueChange={toggleNotifications} />
@@ -94,6 +83,11 @@ const Settings = ({ navigation }) => {
             IMPORTANT: Sellers should provide the right items to consumers.
             Consumers should not scam the sellers into buying the items.
           </Text>
+          <Text style={styles.policiesText2}>
+          From Team Nebula 🌌
+          </Text>
+           
+          
         </ScrollView>
       )}
       <TouchableOpacity style={styles.feedbackButton} onPress={toggleCommentBox}>
@@ -105,11 +99,11 @@ const Settings = ({ navigation }) => {
             placeholder="Write what you think..."
             value={userComment}
             onChangeText={(text) => setUserComment(text)}
-            style={styles.commentInput}
+            style={[styles.commentInput, { height: 100, textAlignVertical: 'top', paddingLeft: 10,  }]} // Adjust the paddingLeft as needed
           />
           <View style={styles.sliderAndSubmitContainer}>
             <View style={styles.ratingContainer}>
-              <Text style={styles.ratingLabel}>
+              <Text style={[styles.ratingLabel, { textAlign: 'center' }]}>
                 ⭐ ⭐ ⭐ Rate TSe-Market! (1-5) ⭐ ⭐ ⭐
               </Text>
               <Slider
@@ -153,7 +147,7 @@ const Settings = ({ navigation }) => {
       </Modal>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.iconNav} onPress={saveSettings}>
-          <Icon name="logout" size={30} color="black" />
+          <Icon name="logout" size={25} color="black" />
           <Text style={styles.iconLabel}>LOGOUT</Text>
         </TouchableOpacity>
       </View>
@@ -218,6 +212,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     borderRadius: 5,
+    maxHeight: 120,
   },
   policiesText: {
     fontSize: 15,
@@ -225,13 +220,22 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontWeight: 'bold',
   },
+  policiesText2: {
+    fontSize: 15,
+    color: 'black',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginTop: 15
+  },
   commentInput: {
-    fontSize: 16,
+    fontSize: 17,
     color: 'black',
     fontStyle: 'italic',
     marginBottom: 20,
     borderColor: '#D3D3D3',
     borderWidth: 3,
+    marginTop: 10,
   },
   commentSubmitButtonText: {
     fontSize: 17,
@@ -245,7 +249,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 5,
   },
   feedbackButton: {
     backgroundColor: 'lightgray',
@@ -269,7 +272,7 @@ const styles = StyleSheet.create({
   iconNav: {
     backgroundColor: '#EFD02C',
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',

@@ -26,7 +26,6 @@ export default function App() {
               fontSize: 23, 
               fontWeight: 'bold', 
               color: '#545F71', 
-              fontFamily: 'lucida grande', 
             },
             headerStyle: {
               backgroundColor: '#EFD02C', 
@@ -42,7 +41,6 @@ export default function App() {
             fontSize: 24, 
             fontWeight: 'bold', 
             color: '#545F71', 
-            fontFamily: 'lucida grande', 
           },
           headerStyle: {
             backgroundColor: '#EFD02C', 
@@ -60,7 +58,6 @@ export default function App() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -78,7 +75,6 @@ export default function App() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
@@ -96,7 +92,6 @@ export default function App() {
             fontSize: 24,
             fontWeight: 'bold',
             color: '#545F71',
-            fontFamily: 'lucida grande',
           },
           headerStyle: {
             backgroundColor: '#EFD02C',
