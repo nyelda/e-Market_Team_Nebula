@@ -15,19 +15,19 @@ const UserProfile = () => {
   });
 
   const [savedItems, setSavedItems] = useState({
-    electronics: [
+    Electronics: [
       { id: 1, name: 'Laptop' },
       { id: 2, name: 'Smartphone' },
     ],
-    clothing: [
+    Clothing: [
       { id: 3, name: 'T-shirt' },
       { id: 4, name: 'Jeans' },
     ],
-    books: [
+    Books: [
       { id: 5, name: 'Book 1' },
       { id: 6, name: 'Book 2' },
     ],
-    uniform: [
+    Uniform: [
       { id: 7, name: 'PE Uniform' },
       { id: 8, name: 'School Uniform' },
     ],
@@ -70,36 +70,36 @@ const UserProfile = () => {
 
   return (
     <FlatList
-    data={savedItemsData}
-    renderItem={renderItem}
-    keyExtractor={(item) => item.category}
-    ListHeaderComponent={() => (
-      <View style={styles.container}>
-        <Image source={user.profileImage} style={styles.profileImage} />
+      data={savedItemsData}
+      renderItem={renderItem}
+      keyExtractor={(item) => item.category}
+      ListHeaderComponent={() => (
+        <View style={styles.container}>
+          <Image source={user.profileImage} style={styles.profileImage} />
 
           {editing ? (
             <>
               <Input
                 label="Username"
-                placeholder="Username"
+                placeholder="i.e. Juan23"
                 value={user.username}
-                onChangeText={(text) => setUser({ ...user, username: text })}
+                onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, username: text }))}
               />
               <Input
                 label="Full Name"
-                placeholder="Full Name"
+                placeholder="i.e. Juan dela Cruz"
                 value={user.fullName}
-                onChangeText={(text) => setUser({ ...user, fullName: text })}
+                onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, fullName: text }))}
               />
               <Input
                 label="Contact Number"
-                placeholder="Contact Number"
+                placeholder="+639........."
                 value={user.contactNumber}
                 onChangeText={(text) => setUser({ ...user, contactNumber: text })}
               />
               <Input
                 label="School Email"
-                placeholder="username@example.edu.ph"
+                placeholder="username@tip.edu.ph"
                 value={user.email}
                 onChangeText={(text) => setUser({ ...user, email: text })}
               />
