@@ -12,8 +12,8 @@ const SuccessModal = ({ isVisible, onClose }) => {
         <View style={styles.modalView}>
           <Text style={styles.text}>You have been logged out successfully!</Text>
           <TouchableOpacity onPress={onClose}>
-                <Text style={styles.modalText} onPress={() => navigation.navigate('Home')}>Back to Home</Text>
-            </TouchableOpacity>
+            <Text style={styles.modalText} onPress={() => navigation.navigate('Home')}>Back to Home</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
