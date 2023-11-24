@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,11 +9,28 @@ import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
+import axios from 'axios';
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  
+  const fetchApi = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/');
+      console.log(res.data);
+    } 
+    
+    catch (error) {
+     console.log(error.message); 
+    }
+  }
+
+  useEffect(() => {
+    fetchApi()
+  }, [])
+
   return (
     <NavigationContainer>
       <Stack.Navigator>

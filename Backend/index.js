@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 require('./models/db');
 const userRouter = require('./routes/Login');
@@ -15,7 +16,7 @@ app.use((req , res, next) => {
     next();
 })
 */
-
+app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 
@@ -24,7 +25,7 @@ app.get('/test', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.send('In progress.')
+    res.json({ success: true, message: 'Welcome to the backend' });
 });
 
 app.listen(port, () => {
