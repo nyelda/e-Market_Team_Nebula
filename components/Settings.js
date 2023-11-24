@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, TouchableWithoutFeedback, TextInput, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
 import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ConfirmationModal from './ConfirmationModal';
-import SuccessModal from './SuccessModal';
 import Modal from 'react-native-modal';
+
 
 const Settings = ({ navigation }) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isSuccessModalVisible, setIsSuccessModalVisible] = useState(false);
   const [showPolicies, setShowPolicies] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [userComment, setUserComment] = useState('');
@@ -23,26 +20,6 @@ const Settings = ({ navigation }) => {
 
   const toggleNotifications = () => {
     setNotificationsEnabled((prevNotifications) => !prevNotifications);
-  };
-
-  const saveSettings = () => {
-    setIsModalVisible(true);
-  };
-
-  const onCancelModal = () => {
-    setIsModalVisible(false);
-  };
-
-  const onConfirmModal = () => {
-    setIsModalVisible(false);
-    console.log('Notifications Enabled:', notificationsEnabled);
-    console.log('Dark Mode Enabled:', darkModeEnabled);
-
-    setIsSuccessModalVisible(true);
-  };
-
-  const onCloseSuccessModal = () => {
-    setIsSuccessModalVisible(false);
   };
 
   const togglePolicies = () => {
@@ -58,6 +35,27 @@ const Settings = ({ navigation }) => {
     setUserComment('');
     setShowCommentBox(false);
     setIsFeedbackMessageModalVisible(true);
+  };
+
+  const goToSignIn = () => {
+    Alert.alert(
+      'Oh no...?',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: () => {
+            Alert.alert('Successfully logged out of your account!');
+            navigation.navigate('Account Sign-In');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
@@ -146,17 +144,11 @@ const Settings = ({ navigation }) => {
         </View>
       </Modal>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.iconNav} onPress={saveSettings}>
+        <TouchableOpacity style={styles.iconNav} onPress={goToSignIn}>
           <Icon name="logout" size={25} color="black" />
           <Text style={styles.iconLabel}>LOGOUT</Text>
         </TouchableOpacity>
       </View>
-      <ConfirmationModal
-        isVisible={isModalVisible}
-        onCancel={onCancelModal}
-        onConfirm={onConfirmModal}
-      />
-      <SuccessModal isVisible={isSuccessModalVisible} onClose={onCloseSuccessModal} />
     </View>
   );
 };

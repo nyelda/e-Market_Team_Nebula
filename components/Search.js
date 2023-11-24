@@ -141,7 +141,6 @@ export default class App extends Component {
                     style={styles.iconNav}
                     onPress={this.toggleModal}
                   >
-                    {/* Replace AddIcon with FontAwesome icon */}
                     <Icon name="plus" style={{ fontSize: 15, color: 'black' }} />
                   </TouchableOpacity>
                 </View>
