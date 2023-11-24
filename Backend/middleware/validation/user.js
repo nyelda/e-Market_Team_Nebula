@@ -1,8 +1,10 @@
 const {check, validationResult } = require('express-validator');
 
 exports.validateUserSignUp = [
-    check('username').trim().not().isEmpty().isLength({min: 3, max: 255}).
-    withMessage('Username must be within 3 to 255 characters.'),
+    check('username').trim()
+    .isEmpty().withMessage('Username is required.')
+    .isString().withMessage('Username must be a valid username.')
+    .isLength({min: 3, max: 255}).withMessage('Username must be within 3 to 255 characters.'),
     
     check('email').normalizeEmail().isEmail().
     withMessage('Invalid Email.'),
