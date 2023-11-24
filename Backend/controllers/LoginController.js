@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/Login');
 
 exports.createUser = async (req, res) => {
@@ -15,4 +16,23 @@ exports.createUser = async (req, res) => {
     });
     await user.save();
     res.json(user);
-}
+};
+
+exports.userSignIn = async (req, res) => {
+    const {username, password} = req.body
+    const user = await User.findOne({username})
+
+    if(!user) return res.json({success: false, message: 'Username not found.'})
+
+    const isMatch = await user.comparePassword(password)
+    if(!isMatch) return res.json({
+        success: false, 
+        message: 'Username/Password does not match.',
+        });
+
+        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, 
+        {expiresIn: '365d'});
+
+    res.json({success: true, user, token})
+};
+

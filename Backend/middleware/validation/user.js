@@ -21,3 +21,17 @@ exports.userValidation = (req, res, next) => {
         const error = result[0].msg;
         res.json({success: false, message: error });
 }
+
+exports.validateUserSignIn = [
+    check('username')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Your username/password is required.'),
+
+    check('password')
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage('Your username/password is required.')
+]
