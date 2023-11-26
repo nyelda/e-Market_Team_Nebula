@@ -6,7 +6,6 @@ import Modal from 'react-native-modal';
 
 
 const Settings = ({ navigation }) => {
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [showPolicies, setShowPolicies] = useState(false);
   const [showCommentBox, setShowCommentBox] = useState(false);
@@ -16,10 +15,6 @@ const Settings = ({ navigation }) => {
 
   const toggleDarkMode = () => {
     setDarkModeEnabled((prevDarkMode) => !prevDarkMode);
-  };
-
-  const toggleNotifications = () => {
-    setNotificationsEnabled((prevNotifications) => !prevNotifications);
   };
 
   const togglePolicies = () => {
@@ -65,10 +60,6 @@ const Settings = ({ navigation }) => {
         <Text style={styles.appVersionValue}>v1.0.0</Text>
       </View>
       <View style={styles.settingRow}>
-        <Text style={styles.settingText}>Enable Notifications</Text>
-        <Switch value={notificationsEnabled} onValueChange={toggleNotifications} />
-      </View>
-      <View style={styles.settingRow}>
         <Text style={styles.settingText}>Dark Mode</Text>
         <Switch value={darkModeEnabled} onValueChange={toggleDarkMode} />
       </View>
@@ -84,8 +75,6 @@ const Settings = ({ navigation }) => {
           <Text style={styles.policiesText2}>
           From Team Nebula 🌌
           </Text>
-           
-          
         </ScrollView>
       )}
       <TouchableOpacity style={styles.feedbackButton} onPress={toggleCommentBox}>
