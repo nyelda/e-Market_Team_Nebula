@@ -3,10 +3,10 @@ Development of an e-Market Mobile Application for Second-Hand Items
 
 Submitted by:
 
-Cordero, Edgardo Kenneth D. 
-Diño, Nicole Rosae A.
-Go, Meljune Royette G.
-Suyat, Daniel Joven U.
+- Cordero, Edgardo Kenneth D. 
+- Diño, Nicole Rosae A.
+- Go, Meljune Royette G.
+- Suyat, Daniel Joven U.
 
 Submitted to:
 
