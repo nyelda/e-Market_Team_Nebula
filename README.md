@@ -1,8 +1,9 @@
-# e-Market_Team_Nebula
-Development of an e-Market Mobile Application for Second-Hand Items
+# Development of an e-Market Mobile Application for Second-Hand Items
+Emerging Technologies 3
 
 Submitted by:
 
+TEAM Nebula
 - Cordero, Edgardo Kenneth D. 
 - Diño, Nicole Rosae A.
 - Go, Meljune Royette G.
@@ -10,6 +11,4 @@ Submitted by:
 
 Submitted to:
 
-Engr. Roman M. Richard
-
-Emerging Tech 3
+- Engr. Roman M. Richard
