@@ -12,3 +12,6 @@ TEAM Nebula
 Submitted to:
 
 - Engr. Roman M. Richard
+
+Section:
+- CPE41S2
