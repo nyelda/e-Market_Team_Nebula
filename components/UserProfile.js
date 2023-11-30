@@ -8,7 +8,7 @@ const fetchUserData = async () => {
   try {
     const response = await axios.get('http://192.168.59.168:8000/user-data', {
       headers: {
-        Authorization: `Bearer ${yourAuthToken}`, // Replace with your actual auth token
+        Authorization: `Bearer ${eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY4ZjkzMjQyNTlhMmNmYmE4MjY1MDciLCJpYXQiOjE3MDEzODAwMjksImV4cCI6MTcwMTQ2NjQyOX0.HujPmTgaEqBDSIQPpsNU85GNNZ4wxNetdM7iKyGWGAQ}`, // Replace with your actual auth token
       },
     });
     const userData = response.data;

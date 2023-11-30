@@ -14,25 +14,6 @@ import axios from 'axios';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const handleSignInPress = async (credentials, navigation) => {
-    try {
-      const response = await axios.post('http://192.168.59.168:8000/sign-in', credentials);
-
-      console.log('Login Response:', response.data);
-
-      if (response.data && response.data.success) {
-        navigation.navigate('Homepage');
-      } else {
-        console.error('Error during login:', response.data.message);
-
-        Alert.alert('Error', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
-    }
-  };
   return (
     <NavigationContainer>
       <Stack.Navigator>
