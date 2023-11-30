@@ -2,6 +2,22 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
+
+const fetchUserData = async () => {
+  try {
+    const response = await axios.get('http://192.168.59.168:8000/user-data', {
+      headers: {
+        Authorization: `Bearer ${yourAuthToken}`, // Replace with your actual auth token
+      },
+    });
+    const userData = response.data;
+    console.log('User Data:', userData);
+    // Update your component state with the fetched user data
+  } catch (error) {
+    console.error('Error fetching user data:', error.message);
+  }
+};
 
 const UserProfile = () => {
   const [user, setUser] = useState({

@@ -69,7 +69,18 @@ exports.userSignIn = async (req, res) => {
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
   };
-  
+
+exports.getUserData = async (req, res) => {
+    try {
+        // Get user data from the authenticated user
+        const user = req.user;
+
+        res.json({ success: true, user });
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
   
 
 
