@@ -1,14 +1,65 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
 
-export default function NewAccount({ navigation }) {
+
+const programs = [
+  'Computer Science',
+  'Computer Engineering',
+  'Civil Engineering',
+  'Architecture',
+  'Mechanical Engineering',
+  'Business Management',
+];
+
+const yearLevels = ['1st Year', '2nd Year', '3rd Year', '4th Year', '5th Year'];
+
+const CreateAcc = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [fullname, setFullName] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+  const [selectedProgram, setSelectedProgram] = useState('');
+  const [selectedYearLevel, setSelectedYearLevel] = useState('');
 
-  const handleCreateAccount = () => {
-    navigation.navigate('Account Sign-In');
-  };
+  const handleCreateAccount = async () => {
+    try {
+        // Validate required fields
+        if (!email || !username || !password || !fullname || !contactNumber || !selectedProgram || !selectedYearLevel) {
+            console.error('All fields are required');
+            return;
+        }
+
+        console.log('Request Data:', {
+          email,
+          username,
+          password,
+          fullname,
+          contactNumber,
+          program: selectedProgram,
+          yearLevel: selectedYearLevel,
+        });
+
+        const response = await axios.post('http://192.168.59.168:8000/create-user', {
+            email,
+            username,
+            password,
+            fullname,
+            contactNumber,
+            program: selectedProgram,
+            yearLevel: selectedYearLevel,
+        });
+
+        console.log('Full response:', response.data);
+
+        // Handle navigation or any other logic after successful account creation
+        navigation.navigate('Account Sign-In');
+      } catch (error) {
+        console.error('Error creating account:', error);
+    }
+};
 
   return (
     <View style={styles.container}>
@@ -36,6 +87,46 @@ export default function NewAccount({ navigation }) {
           secureTextEntry
         />
       </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Full Name</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setFullName(text)}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Contact Number</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => setContactNumber(text)}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Program</Text>
+        <Picker
+          style={styles.input}
+          selectedValue={selectedProgram}
+          onValueChange={(itemValue) => setSelectedProgram(itemValue)}
+        >
+          <Picker.Item label="Select Program" value="" />
+          {programs.map((program, index) => (
+            <Picker.Item key={index} label={program} value={program} />
+          ))}
+        </Picker>
+      </View>
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Year Level</Text>
+        <Picker
+          style={styles.input}
+          selectedValue={selectedYearLevel}
+          onValueChange={(itemValue) => setSelectedYearLevel(itemValue)}
+        >
+          <Picker.Item label="Select Year Level" value="" />
+          {yearLevels.map((level, index) => (
+            <Picker.Item key={index} label={level} value={level} />
+          ))}
+        </Picker>
+      </View>
       <TouchableOpacity
         style={styles.createButton}
         onPress={handleCreateAccount}
@@ -44,7 +135,7 @@ export default function NewAccount({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -97,3 +188,5 @@ const styles = StyleSheet.create({
     color: '#545F71',
   },
 });
+
+export default CreateAcc;

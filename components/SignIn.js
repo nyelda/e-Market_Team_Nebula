@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
 
-export default function NewAccount({ navigation }) {
+export default function SignIn({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleCreateAccount = () => {
-    navigation.navigate('Homepage');
+  const handleSignInAccount = async () => {
+    try {
+      if (!username || !password) {
+        console.error('Username and password are required');
+        return;
+      }
+  
+      const response = await axios.post('http://192.168.59.168:8000/sign-in', {
+        username: username,  // Assuming the server expects 'username' instead of 'identifier'
+        password: password,
+      });
+  
+      console.log('Login Response:', response.data);
+  
+      if (response.data && response.data.success) {
+        navigation.navigate('Homepage');
+      } else {
+        console.error('Error during login:', response.data.message);
+  
+        Alert.alert('Error', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+  
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+    }
   };
 
   return (
@@ -14,9 +39,10 @@ export default function NewAccount({ navigation }) {
       <Text style={styles.header}>Welcome, dear TIPian!</Text>
       <Text style={styles.text1}>Log in below and enter your credentials:</Text>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email/Username</Text>
+        <Text style={styles.label}>Username</Text>
         <TextInput
           style={styles.input}
+          placeholder="Enter your username"
           onChangeText={(text) => setUsername(text)}
         />
       </View>
@@ -24,13 +50,14 @@ export default function NewAccount({ navigation }) {
         <Text style={styles.label}>Password</Text>
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setPassword(text)}
+          placeholder="Enter your password"
           secureTextEntry
+          onChangeText={(text) => setPassword(text)}
         />
       </View>
       <TouchableOpacity
         style={styles.createButton}
-        onPress={handleCreateAccount}
+        onPress={handleSignInAccount}
       >
         <Text style={styles.createButtonText}>Sign In</Text>
       </TouchableOpacity>
@@ -42,8 +69,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#545454',
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
   },
   header: {

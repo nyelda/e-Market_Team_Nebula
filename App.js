@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Logo from "./components/Logo";
@@ -11,26 +11,28 @@ import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
 import axios from 'axios';
 
-
 const Stack = createStackNavigator();
 
 export default function App() {
-  
-  const fetchApi = async () => {
+  const handleSignInPress = async (credentials, navigation) => {
     try {
-      const res = await axios.get('http://localhost:8000/');
-      console.log(res.data);
-    } 
-    
-    catch (error) {
-     console.log(error.message); 
+      const response = await axios.post('http://192.168.59.168:8000/sign-in', credentials);
+
+      console.log('Login Response:', response.data);
+
+      if (response.data && response.data.success) {
+        navigation.navigate('Homepage');
+      } else {
+        console.error('Error during login:', response.data.message);
+
+        Alert.alert('Error', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+
+      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
     }
-  }
-
-  useEffect(() => {
-    fetchApi()
-  }, [])
-
+  };
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -127,13 +129,8 @@ function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <Welcome />
       <Logo />
-      <Input />
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => navigation.navigate('Homepage')}
-      >
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
+      <Input onSignInPress={() => navigation.navigate('Homepage')} />
+
       <TouchableOpacity
         style={styles.newAccountButton}
         onPress={() => navigation.navigate('Forgot Password')}

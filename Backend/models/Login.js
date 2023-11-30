@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true
+    },
     username: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true
     },
@@ -10,19 +18,15 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    prograrm: {
-        type: String,
-        required: true
-    },
-    yearLevel: {
-        type: String,
-        required: true
-    },
     contactNumber: {
         type: Number,
         required: true
     },
-    email: {
+    program: {
+        type: String,
+        required: true
+    },
+    yearLevel: {
         type: String,
         required: true
     },
@@ -41,18 +45,17 @@ UserSchema.pre('save', function(next) {
 })
 
 UserSchema.methods.comparePassword = async function (password) {
-    if(!password) throw new Error('The password cannot be compared because it is missing.');
-
-    try 
-    {
-        const result = await bcrypt.compare(password, this.password)
-        return result;
-    } 
-    catch (error) 
-    {
-        console.log('Error while comparing password.', error.message)
+    if (!password) throw new Error('The password cannot be compared because it is missing.');
+  
+    try {
+      const result = await bcrypt.compare(password, this.password);
+      return result;
+    } catch (error) {
+      console.log('Error while comparing password.', error.message);
+      return false; // Return false if an error occurs during comparison
     }
-}
+  };
+  
 
 UserSchema.statics.isThisEmailInUse = async function(email) {
     if(!email) throw new Error('Invalid Email')
@@ -66,6 +69,6 @@ UserSchema.statics.isThisEmailInUse = async function(email) {
         return false
     }
     
-}
+};
 
 module.exports = mongoose.model('User', UserSchema);
