@@ -42,7 +42,7 @@ const CreateAcc = ({ navigation }) => {
           yearLevel: selectedYearLevel,
         });
 
-        const response = await axios.post('http://192.168.59.168:8000/create-user', {
+        const response = await axios.post('http://192.168.199.168:8000/create-user', {
             email,
             username,
             password,

@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
-
-const fetchUserData = async () => {
-  try {
-    const response = await axios.get('http://192.168.59.168:8000/user-data', {
-      headers: {
-        Authorization: `Bearer ${eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY4ZjkzMjQyNTlhMmNmYmE4MjY1MDciLCJpYXQiOjE3MDEzODAwMjksImV4cCI6MTcwMTQ2NjQyOX0.HujPmTgaEqBDSIQPpsNU85GNNZ4wxNetdM7iKyGWGAQ}`, // Replace with your actual auth token
-      },
-    });
-    const userData = response.data;
-    console.log('User Data:', userData);
-    // Update your component state with the fetched user data
-  } catch (error) {
-    console.error('Error fetching user data:', error.message);
-  }
-};
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserProfile = () => {
+  const defaultProfileImage = require('../assets/profilePic.jpg');
+
   const [user, setUser] = useState({
     username: 'Username',
-    fullName: 'Full Name',
+    fullname: 'Full Name',
     contactNumber: 'Contact Number',
     email: 'School Email',
     program: 'Computer Science',
     yearLevel: '1st Year',
-    profileImage: require('../assets/1.jpeg'),
+    profileImage: defaultProfileImage,
   });
 
   const [savedItems, setSavedItems] = useState({
@@ -51,9 +39,28 @@ const UserProfile = () => {
 
   const [editing, setEditing] = useState(false);
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     setEditing(false);
+    try {
+      const storedToken = await AsyncStorage.getItem('token');
+  
+      if (storedToken) {
+        const response = await axios.patch('http://192.168.199.168:8000/update-user', user, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        });
+  
+        console.log('Update Profile Response:', response.data);
+
+      } else {
+        console.error('No token found. Unable to update profile.');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
+  
 
   const programs = [
     'Computer Science',
@@ -85,6 +92,41 @@ const UserProfile = () => {
     </View>
   );
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Retrieve authentication token from AsyncStorage
+        const token = await AsyncStorage.getItem('token');
+
+        if (token) {
+          // Make authenticated request to get user data
+          const response = await axios.get('http://192.168.199.168:8000/user-data', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.data.success) {
+            // Update user state with fetched data
+            const userProfile = response.data.user;
+            setUser((prevUser) => ({
+              ...prevUser,
+              ...userProfile,
+              profileImage: userProfile.profileImage || defaultProfileImage,
+            }));
+          } else {
+            console.error('Error fetching user data:', response.data.message);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    // Call the fetchUserData function when the component mounts
+    fetchUserData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Image source={user.profileImage} style={styles.profileImage} />
@@ -100,8 +142,8 @@ const UserProfile = () => {
           <Input
             label="Full Name"
             placeholder="i.e. Juan dela Cruz"
-            value={user.fullName}
-            onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, fullName: text }))}
+            value={user.fullname}
+            onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, fullname: text }))}
           />
           <Input
             label="Contact Number"
@@ -149,7 +191,7 @@ const UserProfile = () => {
       ) : (
         <>
           <Text style={styles.userName}>{user.username}</Text>
-          <Text style={styles.fullName}>{user.fullName}</Text>
+          <Text style={styles.fullName}>{user.fullname}</Text>
           <Text style={styles.contactNumber}>{user.contactNumber}</Text>
           <Text style={styles.email}>{user.email}</Text>
           <Text style={styles.programYear}>

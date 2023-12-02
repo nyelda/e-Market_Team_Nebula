@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Input({ onSignInPress, navigation }) {
   const [username, setUsername] = useState('');
@@ -17,12 +18,17 @@ export default function Input({ onSignInPress, navigation }) {
       const payload = isEmail ? { email: username } : { username };
       payload.password = password;
 
-      const response = await axios.post('http://192.168.59.168:8000/sign-in', payload);
+      const response = await axios.post('http://192.168.199.168:8000/sign-in', payload);
       console.log('Login Response:', response.data);
   
       if (response.data && response.data.success) {
         console.log('Login successful');
-        // Invoke the onSignInPress prop with the necessary parameters
+        
+        // Store the token in AsyncStorage
+        const token = response.data.token;
+        await AsyncStorage.setItem('token', token);
+        console.log('Token saved to AsyncStorage:', token);
+
         onSignInPress({ identifier: username, password }, navigation);
       } else {
         console.error('Error during login:', response.data.message);
@@ -30,8 +36,6 @@ export default function Input({ onSignInPress, navigation }) {
     } catch (error) {
       // Handle other errors (network issues, server errors, etc.)
       console.error('Error during login:', error);
-  
-      // Call any error handling logic here
     }
   };
 

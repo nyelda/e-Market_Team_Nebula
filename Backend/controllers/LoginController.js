@@ -51,13 +51,13 @@ exports.userSignIn = async (req, res) => {
   
       // Check if the user exists
       if (!user) {
-        return res.json({ success: false, message: 'Username/Email not found.' });
+        return res.json({ success: false, message: 'Username not found.' });
       }
   
       // Check if the password is correct
       const isMatch = await user.comparePassword(password);
       if (!isMatch) {
-        return res.json({ success: false, message: 'Username/Password does not match.' });
+        return res.json({ success: false, message: 'Username/Password is incorrect.' });
       }
   
       // Generate and send a token if the login is successful
@@ -75,12 +75,53 @@ exports.getUserData = async (req, res) => {
         // Get user data from the authenticated user
         const user = req.user;
 
-        res.json({ success: true, user });
+        // Construct the response object
+        const response = {
+            success: true,
+            user: {
+                username: user.username,
+                fullname: user.fullname,  // Ensure that this field is correctly named
+                contactNumber: user.contactNumber,
+                email: user.email,
+                program: user.program,
+                yearLevel: user.yearLevel,
+                profileImage: user.profileImage,
+            }
+        };
+
+        res.json(response);
     } catch (error) {
         console.error('Error fetching user data:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
-  
+
+exports.updateUserProfile = async (req, res) => {
+  try {
+      const userId = req.user._id;
+      const updateData = req.body; // You may want to add validation for allowed fields
+      
+      // Update user profile in the database
+      const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
+
+      // Construct the response object
+      const response = {
+          success: true,
+          user: {
+              username: updatedUser.username,
+              fullname: updatedUser.fullname,
+              contactNumber: updatedUser.contactNumber,
+              email: updatedUser.email,
+              program: updatedUser.program,
+              yearLevel: updatedUser.yearLevel,
+          }
+      };
+
+      res.json(response);
+  } catch (error) {
+      console.error('Error updating user profile:', error);
+      res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
 
 
