@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Input } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
@@ -53,13 +53,15 @@ const UserProfile = () => {
             Authorization: `Bearer ${storedToken}`,
           },
         });
-  
+
+        alert('Profile is successfully updated ');
         console.log('Update Profile Response:', response.data);
 
       } else {
         console.error('No token found. Unable to update profile.');
       }
     } catch (error) {
+      alert('Error updating profile: ' + error);
       console.error('Error updating profile:', error);
     }
   };
@@ -151,9 +153,10 @@ const UserProfile = () => {
           <Input
             label="Contact Number"
             placeholder="+639........."
-            value={user.contactNumber}
+            value={user.contactNumber.toString()}
             onChangeText={(text) => setUser({ ...user, contactNumber: text })}
           />
+
           <Input
             label="School Email"
             placeholder="username@tip.edu.ph"
@@ -163,8 +166,9 @@ const UserProfile = () => {
 
           {/* Program Dropdown */}
           <View style={styles.pickerContainer}>
-            <Text>Select Program:</Text>
+            <Text style={styles.pickerLabel}>Select Program:</Text>
             <Picker
+              style={styles.picker}
               selectedValue={user.program}
               onValueChange={(itemValue) => setUser((prevUser) => ({ ...prevUser, program: itemValue }))}
             >
@@ -174,10 +178,10 @@ const UserProfile = () => {
             </Picker>
           </View>
 
-          {/* Year Level Dropdown */}
           <View style={styles.pickerContainer}>
-            <Text>Select Year Level:</Text>
+            <Text style={styles.pickerLabel}>Select Year Level:</Text>
             <Picker
+              style={styles.picker}
               selectedValue={user.yearLevel}
               onValueChange={(itemValue) => setUser((prevUser) => ({ ...prevUser, yearLevel: itemValue }))}
             >
@@ -255,6 +259,16 @@ const styles = StyleSheet.create({
   },
   pickerContainer: {
     marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  pickerLabel: {
+    marginRight: 10,
+    fontSize: 18, 
+    paddingLeft: 20,
+  },
+  picker: {
+    flex: 1,
   },
   separator: {
     borderBottomWidth: 3,

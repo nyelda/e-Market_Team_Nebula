@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Switch, StyleSheet, TextInput, ScrollView
 import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Settings = ({ navigation }) => {
@@ -32,7 +33,7 @@ const Settings = ({ navigation }) => {
     setIsFeedbackMessageModalVisible(true);
   };
 
-  const goToSignIn = () => {
+  const goToSignIn = async () => {
     Alert.alert(
       'Oh no...?',
       'Are you sure you want to logout?',
@@ -43,8 +44,17 @@ const Settings = ({ navigation }) => {
         },
         {
           text: 'Confirm',
-          onPress: () => {
+          onPress: async () => {
+            // Clear the authentication token
+            await AsyncStorage.removeItem('token');
+  
+            // Verify if the token is removed
+            const tokenAfterLogout = await AsyncStorage.getItem('token');
+            console.log('Token after logout:', tokenAfterLogout);
+  
             Alert.alert('Successfully logged out of your account!');
+  
+            // Redirect the user to the sign-in screen
             navigation.navigate('Account Sign-In');
           },
         },
@@ -52,6 +62,7 @@ const Settings = ({ navigation }) => {
       { cancelable: false }
     );
   };
+  
 
   return (
     <View style={[styles.container, darkModeEnabled && styles.darkModeContainer]}>

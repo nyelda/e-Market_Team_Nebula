@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import Constants from 'expo-constants';
@@ -32,6 +32,7 @@ const CreateAcc = ({ navigation }) => {
     try {
         // Validate required fields
         if (!email || !username || !password || !fullname || !contactNumber || !selectedProgram || !selectedYearLevel) {
+            alert('All fields are required');
             console.error('All fields are required');
             return;
         }
@@ -61,6 +62,7 @@ const CreateAcc = ({ navigation }) => {
         // Handle navigation or any other logic after successful account creation
         navigation.navigate('Account Sign-In');
       } catch (error) {
+        alert('Error creating account: ' + error);
         console.error('Error creating account:', error);
     }
 };

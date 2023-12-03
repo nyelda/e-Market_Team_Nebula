@@ -12,6 +12,7 @@ export default function SignIn({ navigation }) {
   const handleSignInAccount = async () => {
     try {
       if (!username || !password) {
+        alert('Username and password are required');
         console.error('Username and password are required');
         return;
       }

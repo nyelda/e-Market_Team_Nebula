@@ -45,6 +45,7 @@ export default function App() {
             backgroundColor: '#EFD02C', 
           },
           headerTintColor: '#545F71', 
+          headerLeft: null,
         }}
         />
       <Stack.Screen
@@ -79,6 +80,7 @@ export default function App() {
             backgroundColor: '#EFD02C',
           },
           headerTintColor: '#545F71',
+          headerLeft: null,
         }}
       />
       <Stack.Screen
