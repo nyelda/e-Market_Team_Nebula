@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 
 const programs = [
@@ -23,6 +26,7 @@ const CreateAcc = ({ navigation }) => {
   const [contactNumber, setContactNumber] = useState('');
   const [selectedProgram, setSelectedProgram] = useState('');
   const [selectedYearLevel, setSelectedYearLevel] = useState('');
+  
 
   const handleCreateAccount = async () => {
     try {
@@ -42,7 +46,7 @@ const CreateAcc = ({ navigation }) => {
           yearLevel: selectedYearLevel,
         });
 
-        const response = await axios.post('http://192.168.199.168:8000/create-user', {
+        const response = await axios.post(`${backendUrl}/create-user`, {
             email,
             username,
             password,

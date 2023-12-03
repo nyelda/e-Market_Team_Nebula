@@ -1,5 +1,6 @@
 {
   "expo": {
+    "config": "./app.config.js",
     "name": "testing",
     "slug": "testing",
     "version": "1.0.0",

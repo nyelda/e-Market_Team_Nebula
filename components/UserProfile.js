@@ -4,6 +4,9 @@ import { Input } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 const UserProfile = () => {
   const defaultProfileImage = require('../assets/profilePic.jpg');
@@ -45,7 +48,7 @@ const UserProfile = () => {
       const storedToken = await AsyncStorage.getItem('token');
   
       if (storedToken) {
-        const response = await axios.patch('http://192.168.199.168:8000/update-user', user, {
+        const response = await axios.patch(`${backendUrl}/update-user`, user, {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
@@ -100,7 +103,7 @@ const UserProfile = () => {
 
         if (token) {
           // Make authenticated request to get user data
-          const response = await axios.get('http://192.168.199.168:8000/user-data', {
+          const response = await axios.get(`${backendUrl}/user-data`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

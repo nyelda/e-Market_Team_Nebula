@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 export default function Input({ onSignInPress, navigation }) {
   const [username, setUsername] = useState('');
@@ -18,7 +21,7 @@ export default function Input({ onSignInPress, navigation }) {
       const payload = isEmail ? { email: username } : { username };
       payload.password = password;
 
-      const response = await axios.post('http://192.168.199.168:8000/sign-in', payload);
+      const response = await axios.post(`${backendUrl}/sign-in`, payload);
       console.log('Login Response:', response.data);
   
       if (response.data && response.data.success) {
@@ -31,10 +34,12 @@ export default function Input({ onSignInPress, navigation }) {
 
         onSignInPress({ identifier: username, password }, navigation);
       } else {
+        alert('Error during login: ' + response.data.message);
         console.error('Error during login:', response.data.message);
       }
     } catch (error) {
       // Handle other errors (network issues, server errors, etc.)
+      alert('Error during login: ' + error.message);
       console.error('Error during login:', error);
     }
   };

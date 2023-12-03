@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 export default function SignIn({ navigation }) {
   const [username, setUsername] = useState('');
@@ -13,7 +16,7 @@ export default function SignIn({ navigation }) {
         return;
       }
   
-      const response = await axios.post('http://192.168.199.168:8000/sign-in', {
+      const response = await axios.post(`${backendUrl}/sign-in`, {
         username: username,  // Assuming the server expects 'username' instead of 'identifier'
         password: password,
       });
