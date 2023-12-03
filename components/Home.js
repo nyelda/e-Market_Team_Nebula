@@ -1,17 +1,67 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Search from '../components/Search';
 import UserProfile from '../components/UserProfile';
 import MyBag from '../components/MyBag';
-import Settings from "./Settings";
+import Settings from './Settings';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
 function HomeScreen({ navigation }) {
+  const onBackPress = () => {
+    handleLogout();
+    return true; // prevent default behavior (i.e., going back)
+  };
+
+  useEffect(() => {
+    // Add event listener for the back button press
+    const backHandler = navigation.addListener('beforeRemove', (e) => {
+      // Prevent default behavior (i.e., going back)
+      e.preventDefault();
+
+      // Call the onBackPress function
+      onBackPress();
+    });
+
+    // Clean up the event listener when the component is unmounted
+    return () => backHandler();
+  }, [navigation]);
+
+  const handleLogout = async () => {
+    Alert.alert(
+      'Oh no...?',
+      'Are you sure you want to logout?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: async () => {
+            // Clear the authentication token
+            await AsyncStorage.removeItem('token');
+
+            // Verify if the token is removed
+            const tokenAfterLogout = await AsyncStorage.getItem('token');
+            console.log('Token after logout:', tokenAfterLogout);
+
+            Alert.alert('Successfully logged out of your account!');
+
+            // Navigate to the "Account Sign-In" screen
+            navigation.navigate('Account Sign-In');
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   const goToSearch = () => {
     navigation.navigate('Search');
   };
@@ -50,7 +100,7 @@ function HomeScreen({ navigation }) {
       </View>
     </View>
   );
-};
+}
 
 export default function Home() {
   const navigation = useNavigation();

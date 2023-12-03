@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, BackHandler  } from 'react-native';
 import axios from 'axios';
 import Constants from 'expo-constants';
 
@@ -37,6 +37,14 @@ export default function SignIn({ navigation }) {
       Alert.alert('Error', 'An unexpected error occurred. Please try again.');
     }
   };
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      // Prevent going back when the user is on the Sign In screen
+      return true;
+    });
+
+    return () => backHandler.remove(); // Cleanup the event listener on component unmount
+  }, []);
 
   return (
     <View style={styles.container}>

@@ -11,15 +11,7 @@ const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 const UserProfile = () => {
   const defaultProfileImage = require('../assets/profilePic.jpg');
 
-  const [user, setUser] = useState({
-    username: 'Username',
-    fullname: 'Full Name',
-    contactNumber: 'Contact Number',
-    email: 'School Email',
-    program: 'Computer Science',
-    yearLevel: '1st Year',
-    profileImage: defaultProfileImage,
-  });
+  const [user, setUser] = useState(null);
 
   const [savedItems, setSavedItems] = useState({
     Electronics: [
@@ -46,7 +38,7 @@ const UserProfile = () => {
     setEditing(false);
     try {
       const storedToken = await AsyncStorage.getItem('token');
-  
+
       if (storedToken) {
         const response = await axios.patch(`${backendUrl}/update-user`, user, {
           headers: {
@@ -56,7 +48,6 @@ const UserProfile = () => {
 
         alert('Profile is successfully updated ');
         console.log('Update Profile Response:', response.data);
-
       } else {
         console.error('No token found. Unable to update profile.');
       }
@@ -65,7 +56,6 @@ const UserProfile = () => {
       console.error('Error updating profile:', error);
     }
   };
-  
 
   const programs = [
     'Computer Science',
@@ -100,11 +90,9 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Retrieve authentication token from AsyncStorage
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
-          // Make authenticated request to get user data
           const response = await axios.get(`${backendUrl}/user-data`, {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -112,13 +100,11 @@ const UserProfile = () => {
           });
 
           if (response.data.success) {
-            // Update user state with fetched data
             const userProfile = response.data.user;
-            setUser((prevUser) => ({
-              ...prevUser,
+            setUser({
               ...userProfile,
               profileImage: userProfile.profileImage || defaultProfileImage,
-            }));
+            });
           } else {
             console.error('Error fetching user data:', response.data.message);
           }
@@ -128,48 +114,46 @@ const UserProfile = () => {
       }
     };
 
-    // Call the fetchUserData function when the component mounts
     fetchUserData();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Image source={user.profileImage} style={styles.profileImage} />
+      <Image source={user?.profileImage || defaultProfileImage} style={styles.profileImage} />
 
       {editing ? (
         <>
           <Input
             label="Username"
             placeholder="i.e. Juan23"
-            value={user.username}
+            value={user?.username}
             onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, username: text }))}
           />
           <Input
             label="Full Name"
             placeholder="i.e. Juan dela Cruz"
-            value={user.fullname}
+            value={user?.fullname}
             onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, fullname: text }))}
           />
           <Input
             label="Contact Number"
             placeholder="+639........."
-            value={user.contactNumber.toString()}
-            onChangeText={(text) => setUser({ ...user, contactNumber: text })}
+            value={user?.contactNumber.toString()}
+            onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, contactNumber: text }))}
           />
 
           <Input
             label="School Email"
             placeholder="username@tip.edu.ph"
-            value={user.email}
-            onChangeText={(text) => setUser({ ...user, email: text })}
+            value={user?.email}
+            onChangeText={(text) => setUser((prevUser) => ({ ...prevUser, email: text }))}
           />
 
-          {/* Program Dropdown */}
           <View style={styles.pickerContainer}>
             <Text style={styles.pickerLabel}>Select Program:</Text>
             <Picker
               style={styles.picker}
-              selectedValue={user.program}
+              selectedValue={user?.program}
               onValueChange={(itemValue) => setUser((prevUser) => ({ ...prevUser, program: itemValue }))}
             >
               {programs.map((program, index) => (
@@ -182,7 +166,7 @@ const UserProfile = () => {
             <Text style={styles.pickerLabel}>Select Year Level:</Text>
             <Picker
               style={styles.picker}
-              selectedValue={user.yearLevel}
+              selectedValue={user?.yearLevel}
               onValueChange={(itemValue) => setUser((prevUser) => ({ ...prevUser, yearLevel: itemValue }))}
             >
               {yearLevels.map((year, index) => (
@@ -197,12 +181,12 @@ const UserProfile = () => {
         </>
       ) : (
         <>
-          <Text style={styles.userName}>{user.username}</Text>
-          <Text style={styles.fullName}>{user.fullname}</Text>
-          <Text style={styles.contactNumber}>{user.contactNumber}</Text>
-          <Text style={styles.email}>{user.email}</Text>
+          <Text style={styles.userName}>{user?.username}</Text>
+          <Text style={styles.fullName}>{user?.fullname}</Text>
+          <Text style={styles.contactNumber}>{user?.contactNumber}</Text>
+          <Text style={styles.email}>{user?.email}</Text>
           <Text style={styles.programYear}>
-            {user.program}, {user.yearLevel}
+            {user?.program}, {user?.yearLevel}
           </Text>
 
           <TouchableOpacity style={styles.editUpdateButton} onPress={() => setEditing(true)}>

@@ -54,7 +54,7 @@ const Settings = ({ navigation }) => {
   
             Alert.alert('Successfully logged out of your account!');
   
-            // Redirect the user to the sign-in screen
+            // Replace the current screen with the Sign-In screen
             navigation.navigate('Account Sign-In');
           },
         },
@@ -62,6 +62,7 @@ const Settings = ({ navigation }) => {
       { cancelable: false }
     );
   };
+  
   
 
   return (
