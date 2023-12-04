@@ -5,10 +5,12 @@ import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
+import { useNavigation, useIsFocused } from '@react-navigation/native';  
 
 const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 const UserProfile = () => {
+  const isFocused = useIsFocused();
   const defaultProfileImage = require('../assets/profilePic.jpg');
 
   const [user, setUser] = useState(null);
@@ -114,8 +116,11 @@ const UserProfile = () => {
       }
     };
 
-    fetchUserData();
-  }, []);
+    if (isFocused) {
+      // Fetch user data only when the screen is focused
+      fetchUserData();
+    }
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

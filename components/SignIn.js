@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, BackHandler  } from 'react-native';
 import axios from 'axios';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
@@ -26,6 +27,13 @@ export default function SignIn({ navigation }) {
   
       if (response.data && response.data.success) {
         navigation.navigate('Homepage');
+        console.log('Login successful');
+        // Store the token in AsyncStorage
+        const token = response.data.token;
+        await AsyncStorage.setItem('token', token);
+        console.log('Token saved to AsyncStorage:', token);
+        navigation.navigate('Homepage')
+        
       } else {
         console.error('Error during login:', response.data.message);
   
@@ -73,6 +81,22 @@ export default function SignIn({ navigation }) {
       >
         <Text style={styles.createButtonText}>Sign In</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.newAccountButton}
+        onPress={() => navigation.navigate('Forgot Password')}
+      >
+        <View style={styles.but}>
+          <Text style={styles.style2}>Forgot Password?</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.newAccountButton}
+        onPress={() => navigation.navigate('Create Account')}
+      >
+        <View style={styles.but}>
+          <Text style={styles.style2}>New Here? Create an Account</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -84,6 +108,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+  },
+  but: {
+    paddingBottom: 10,
+    paddingTop: 30,
   },
   header: {
     fontSize: 24,
@@ -126,5 +154,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#545F71',
+  },
+  style2: {
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#EFD02C',
+    textDecorationLine: 'underline',
   },
 });
