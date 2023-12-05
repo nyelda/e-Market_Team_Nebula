@@ -8,6 +8,8 @@ import Home from "./components/Home";
 import CreateAcc from "./components/CreateAcc";
 import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
+import CodeVerif from "./components/CodeVerif";
+import ResetPw from "./components/ResetPw";
 
 const Stack = createStackNavigator();
 
@@ -88,6 +90,40 @@ export default function App() {
         component={ForgotPw}
         options={{
           headerTitle: 'Forgot Password?', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+        }}
+      />
+      <Stack.Screen
+        name="Code Verification"
+        component={CodeVerif}
+        options={{
+          headerTitle: 'Verify your Code', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+        }}
+      />
+      <Stack.Screen
+        name="Reset Password"
+        component={ResetPw}
+        options={{
+          headerTitle: 'Reset your Password', 
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 24,
