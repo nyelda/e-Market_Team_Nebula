@@ -9,7 +9,7 @@ export default function ForgotPassword({ navigation }) {
       {
         text: 'OK',
         onPress: () => {
-          navigation.navigate('Reset Password', { email });
+          navigation.navigate('Code Verification', { email });
         },
       },
     ]);
