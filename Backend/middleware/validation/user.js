@@ -64,3 +64,10 @@ exports.validateUserSignIn = [
     .isEmpty()
     .withMessage('Your username/password is required.')
 ]
+
+exports.validatePassReset = [
+
+    check('password').trim().not().isEmpty().withMessage('Password is Empty').
+    isLength({min:8, max: 255}).
+    withMessage('Password must be within 8 to 255 characters.'),
+]

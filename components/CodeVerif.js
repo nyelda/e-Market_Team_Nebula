@@ -1,18 +1,38 @@
-// CodeVerification.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 export default function CodeVerification({ navigation, route }) {
-  const { email, verificationCode } = route.params;
+  const { email } = route.params;
   const [enteredCode, setEnteredCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleVerifyCode = () => {
-    if (enteredCode) {
-      navigation.navigate('Reset Password', { email });
-    } else {
-      Alert.alert('Invalid Code', 'Please enter the correct verification code.');
+  const handleVerifyCode = async () => {
+    try {
+      setLoading(true);
+  
+      const response = await axios.post(`${backendUrl}/verify-code`, { email, code: Number(enteredCode) });
+  
+      console.log('Verification Response:', response);
+  
+      if (response.data.success) {
+        navigation.navigate('Reset Password', { email });
+      } else {
+        setError('Invalid verification code. Please try again.');
+      }
+    } catch (error) {
+      
+      console.error('Verification Error:', error);
+      setError('An error occurred. Please try again.'); 
+    } finally {
+      setLoading(false);
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -87,5 +107,3 @@ const styles = StyleSheet.create({
     },
   });
   
-// ResetPassword.js
-// Similar to your ForgotPassword.js, but with the ability to reset the password

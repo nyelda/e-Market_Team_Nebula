@@ -19,16 +19,10 @@ function HomeScreen({ navigation }) {
   };
 
   useEffect(() => {
-    // Add event listener for the back button press
     const backHandler = navigation.addListener('beforeRemove', (e) => {
-      // Prevent default behavior (i.e., going back)
       e.preventDefault();
-
-      // Call the onBackPress function
       onBackPress();
     });
-
-    // Clean up the event listener when the component is unmounted
     return () => backHandler();
   }, [navigation]);
 

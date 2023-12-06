@@ -1,11 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 require('./models/db');
 const userRouter = require('./routes/Login');
 const app = express();
 const port = 8000;
 
+app.use(bodyParser.json());
 app.use(cors({
     origin: '*', // Replace with another frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

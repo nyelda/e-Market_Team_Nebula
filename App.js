@@ -68,24 +68,6 @@ export default function App() {
         }}
       />
       <Stack.Screen
-        name="Account Sign-In"
-        component={SignIn}
-        options={{
-          headerTitle: 'Sign-in to your Account', 
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontSize: 24,
-            fontWeight: 'bold',
-            color: '#545F71',
-          },
-          headerStyle: {
-            backgroundColor: '#EFD02C',
-          },
-          headerTintColor: '#545F71',
-          headerLeft: null,
-        }}
-      />
-      <Stack.Screen
         name="Forgot Password"
         component={ForgotPw}
         options={{
@@ -134,6 +116,24 @@ export default function App() {
             backgroundColor: '#EFD02C',
           },
           headerTintColor: '#545F71',
+        }}
+      />
+      <Stack.Screen
+        name="Account Sign-In"
+        component={SignIn}
+        options={{
+          headerTitle: 'Sign-in to your Account', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
+          headerLeft: null,
         }}
       />
       </Stack.Navigator>

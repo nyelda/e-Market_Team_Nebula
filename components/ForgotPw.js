@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import axios from 'axios';
+import Constants from 'expo-constants';
+
+const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 export default function ForgotPassword({ navigation }) {
   const [email, setEmail] = useState('');
 
-  const handleSendCode = () => {
-    Alert.alert('Code Sent', 'A reset code has been sent to your email.', [
-      {
-        text: 'OK',
-        onPress: () => {
-          navigation.navigate('Code Verification', { email });
-        },
-      },
-    ]);
+  const handleSendCode = async () => {
+    try {
+      const response = await axios.post(`${backendUrl}/send-code`, { email });
+  
+      if (response.data.success) {
+        console.log('Verification code sent successfully');
+        navigation.navigate('Code Verification', { email });
+      } else {
+        console.error('Error sending verification code:', response.data.message);
+        Alert.alert('Error', 'Failed to send verification code.');
+      }
+    } catch (error) {
+      console.error('Error sending verification code:', error);
+      Alert.alert('Error', 'Failed to send verification code.');
+    }
   };
+  
 
   return (
     <View style={styles.container}>
