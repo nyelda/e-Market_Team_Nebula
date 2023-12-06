@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Item</title>
+</head>
+<body>
+  <h1>Add Item</h1>
+  <form action="/addItem" method="post">
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" name="itemName" required><br>
+    <label for="itemDescription">Item Description:</label>
+    <input type="text" id="itemDescription" name="itemDescription" required><br>
+    <label for="itemPic">Item Pic (URL):</label>
+    <input type="text" id="itemPic" name="itemPic" required><br>
+    <button type="submit">Add Item</button>
+  </form>
+  <a href="/">Back to Item List</a>
+</body>
+</html>
