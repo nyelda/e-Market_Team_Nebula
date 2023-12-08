@@ -1,10 +1,11 @@
-import React from 'react';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 function App() {
-  const items = [
+  const [cartItems, setCartItems] = useState([
     {
+      id: 1,
       name: 'T-Square',
       price: '₱450.00',
       rating: 4.5,
@@ -12,6 +13,7 @@ function App() {
       seller: 'Daniel Suyat',
     },
     {
+      id: 2,
       name: 'PE Uniform Male',
       price: '₱275.50',
       rating: 3.9,
@@ -19,6 +21,7 @@ function App() {
       seller: 'Meljune Go',
     },
     {
+      id: 3,
       name: 'Casio fx-500ES',
       price: '₱623.79',
       rating: 4.3,
@@ -26,6 +29,7 @@ function App() {
       seller: 'Angelica Cruz',
     },
     {
+      id: 4,
       name: 'Protractor',
       price: '₱100.67',
       rating: 4.8,
@@ -33,6 +37,7 @@ function App() {
       seller: 'Nicole Dino',
     },
     {
+      id: 5,
       name: 'School Uniform Male',
       price: '₱999.01',
       rating: 3.3,
@@ -40,13 +45,35 @@ function App() {
       seller: 'Kenneth Cordero',
     },
     {
+      id: 6,
       name: 'Predator Gaming Laptop',
       price: '₱80,000.00',
       rating: 4.9,
       stock: 2,
       seller: 'Johnny Eniceo',
     },
-  ];
+  ]);
+
+  const handleRemoveItem = (itemId) => {
+    Alert.alert(
+      'Delete Item',
+      'Do you want to remove this item from My Bag?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            const updatedItems = cartItems.filter((item) => item.id !== itemId);
+            setCartItems(updatedItems);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
@@ -58,6 +85,12 @@ function App() {
       </View>
       <Text>Stock: {item.stock}</Text>
       <Text>Seller: {item.seller}</Text>
+      <TouchableOpacity
+        style={styles.removeButton}
+        onPress={() => handleRemoveItem(item.id)}
+      >
+        <Icon name="trash" size={20} color="red" />
+      </TouchableOpacity>
     </View>
   );
 
@@ -65,9 +98,9 @@ function App() {
     <View style={{ flex: 1, padding: 16 }}>
       <Text style={styles.text}>Check Items in My Bag:</Text>
       <FlatList
-        data={items}
+        data={cartItems}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
@@ -79,6 +112,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 5,
     borderRadius: 5,
+    position: 'relative',
   },
   itemName: {
     fontWeight: 'bold',
@@ -88,10 +122,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  removeButton: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
+  },
   text: {
-    fontSize: 20, 
+    fontSize: 20,
     fontWeight: 'bold',
-  }
+  },
 });
 
 export default App;
