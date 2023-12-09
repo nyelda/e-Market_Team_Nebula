@@ -30,7 +30,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profileImage: Buffer,
 });
 
 UserSchema.pre('save', function(next) {
