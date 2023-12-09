@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import Constants from 'expo-constants';
@@ -67,78 +67,80 @@ const CreateAcc = ({ navigation }) => {
 };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Create an account</Text>
-      <Text style={styles.text1}>Enter your account details below:</Text>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setEmail(text)}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setUsername(text)}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setFullName(text)}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Contact Number</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setContactNumber(text)}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Program</Text>
-        <Picker
-          style={styles.input}
-          selectedValue={selectedProgram}
-          onValueChange={(itemValue) => setSelectedProgram(itemValue)}
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <Text style={styles.header}>Create an account</Text>
+        <Text style={styles.text1}>Enter your account details below:</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setEmail(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Username</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setUsername(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Password</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setPassword(text)}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Full Name</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setFullName(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Contact Number</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => setContactNumber(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Program</Text>
+          <Picker
+            style={styles.input}
+            selectedValue={selectedProgram}
+            onValueChange={(itemValue) => setSelectedProgram(itemValue)}
+          >
+            <Picker.Item label="Select Program" value="" />
+            {programs.map((program, index) => (
+              <Picker.Item key={index} label={program} value={program} />
+            ))}
+          </Picker>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Year Level</Text>
+          <Picker
+            style={styles.input}
+            selectedValue={selectedYearLevel}
+            onValueChange={(itemValue) => setSelectedYearLevel(itemValue)}
+          >
+            <Picker.Item label="Select Year Level" value="" />
+            {yearLevels.map((level, index) => (
+              <Picker.Item key={index} label={level} value={level} />
+            ))}
+          </Picker>
+        </View>
+        <TouchableOpacity
+          style={styles.createButton}
+          onPress={handleCreateAccount}
         >
-          <Picker.Item label="Select Program" value="" />
-          {programs.map((program, index) => (
-            <Picker.Item key={index} label={program} value={program} />
-          ))}
-        </Picker>
+          <Text style={styles.createButtonText}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Year Level</Text>
-        <Picker
-          style={styles.input}
-          selectedValue={selectedYearLevel}
-          onValueChange={(itemValue) => setSelectedYearLevel(itemValue)}
-        >
-          <Picker.Item label="Select Year Level" value="" />
-          {yearLevels.map((level, index) => (
-            <Picker.Item key={index} label={level} value={level} />
-          ))}
-        </Picker>
-      </View>
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={handleCreateAccount}
-      >
-        <Text style={styles.createButtonText}>Sign Up</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -191,6 +193,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#545F71',
+  },
+  scrollView: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
 });
 
