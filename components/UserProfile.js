@@ -10,6 +10,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
 const UserProfile = () => {
+  
   const isFocused = useIsFocused();
   const defaultProfileImage = require('../assets/profilePic.jpg');
 
@@ -17,20 +18,16 @@ const UserProfile = () => {
 
   const [savedItems, setSavedItems] = useState({
     Electronics: [
-      { id: 1, name: 'Laptop' },
-      { id: 2, name: 'Smartphone' },
+
     ],
     Clothing: [
-      { id: 3, name: 'T-shirt' },
-      { id: 4, name: 'Jeans' },
+
     ],
-    Books: [
-      { id: 5, name: 'Book 1' },
-      { id: 6, name: 'Book 2' },
+    School: [
+      { id: 1, name: 'T - Square' },
     ],
     Uniform: [
-      { id: 7, name: 'PE Uniform' },
-      { id: 8, name: 'School Uniform' },
+      
     ],
   });
 

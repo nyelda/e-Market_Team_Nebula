@@ -6,7 +6,6 @@ import Constants from 'expo-constants';
 
 const backendUrl = Constants.expoConfig.extra.REACT_APP_BACKEND_URL;
 
-
 const programs = [
   'Computer Science',
   'Computer Engineering',

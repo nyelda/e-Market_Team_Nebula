@@ -30,45 +30,10 @@ export default class App extends Component {
     var data = [
       {
         name: 'T-Square',
-        author: 'Daniel Suyat',
+        author: 'Nebula Admin',
         img: require('../assets/1.jpg'),
         description:
           'T-Square from TIPC 3rd Year Architecture.',
-      },
-      {
-        name: 'Protractor',
-        author: 'Nicole Dino',
-        img: require('../assets/2.jpg'),
-        description:
-          'Protractor from TIPC 2rd Year Architecture.',
-      },
-      {
-        name: 'School Uniform Male',
-        author: 'Kenneth Cordero',
-        //img: require('../assets/3.jpg'),
-        description:
-          'School Uniform from TIPC 4th Year Computer Engineering.',
-      },
-      {
-        name: 'PE Uniform Male',
-        author: 'Meljune Go',
-        img: require('../assets/4.jpg'),
-        description:
-          'Protractor from TIPC 4th Year Computer Science.',
-      },
-      {
-        name: 'Predator Laptop',
-        author: 'Johnny Eniceo',
-        img: require('../assets/5.jpg'),
-        description:
-          'Predator Laptop from TIPC 4th Year Information Technology.',
-      },
-      {
-        name: 'Casio fx-500ES',
-        author: 'Angelica Cruz',
-        img: require('../assets/6.jpg'),
-        description:
-          'Casio fx-500ES from TIPC 1st Year BS Mathematics.',
       },
     ];
 
