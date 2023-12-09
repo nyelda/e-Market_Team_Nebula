@@ -4,10 +4,12 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 import Search from '../components/Search';
 import UserProfile from '../components/UserProfile';
 import MyBag from '../components/MyBag';
 import Settings from './Settings';
+import AddList from './AddList';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
@@ -15,7 +17,7 @@ const Stack = createStackNavigator();
 function HomeScreen({ navigation }) {
   const onBackPress = () => {
     handleLogout();
-    return true; // prevent default behavior (i.e., going back)
+    return true; 
   };
 
   useEffect(() => {
@@ -38,22 +40,22 @@ function HomeScreen({ navigation }) {
         {
           text: 'Confirm',
           onPress: async () => {
-            // Clear the authentication token
+            
             await AsyncStorage.removeItem('token');
-
-            // Verify if the token is removed
             const tokenAfterLogout = await AsyncStorage.getItem('token');
             console.log('Token after logout:', tokenAfterLogout);
 
             Alert.alert('Successfully logged out of your account!');
-
-            // Navigate to the "Account Sign-In" screen
             navigation.navigate('Account Sign-In');
           },
         },
       ],
       { cancelable: false }
     );
+  };
+
+  const goToAddList = () => {
+    navigation.navigate('Add Item Listing')
   };
 
   const goToSearch = () => {
@@ -85,6 +87,9 @@ function HomeScreen({ navigation }) {
         <TouchableOpacity onPress={goToUserProfile} style={styles.icon}>
           <Icon2 name="account-edit-outline" size={30} color="#EFD02C" />
         </TouchableOpacity>
+        <TouchableOpacity onPress={goToAddList} style={styles.icon}>
+          <Icon3 name="pluscircleo" size={30} color="#EFD02C" />
+        </TouchableOpacity>
         <TouchableOpacity onPress={goToMyBag} style={styles.icon}>
           <Icon2 name="bag-personal-outline" size={30} color="#EFD02C" />
         </TouchableOpacity>
@@ -106,6 +111,23 @@ export default function Home() {
         component={HomeScreen}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Add Item Listing"
+        component={AddList}
+        options={{
+          headerTitle: 'Add an Item Listing', 
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: '#545F71',
+          },
+          headerStyle: {
+            backgroundColor: '#EFD02C',
+          },
+          headerTintColor: '#545F71',
         }}
       />
       <Stack.Screen

@@ -1,8 +1,10 @@
-// AddList.js
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
+import Constants from 'expo-constants';
 
-const AddList = ({ onAddListPress }) => {
+const AddList = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
