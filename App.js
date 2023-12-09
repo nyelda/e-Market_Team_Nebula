@@ -10,8 +10,36 @@ import SignIn from "./components/SignIn";
 import ForgotPw from "./components/ForgotPw";
 import CodeVerif from "./components/CodeVerif";
 import ResetPw from "./components/ResetPw";
+import React, { useState } from 'react';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import AddList from './components/AddList';
 
-const Stack = createStackNavigator();
+
+export default function App() {
+  const [lists, setLists] = useState([]);
+
+  const handleAddList = (newList) => {
+    // Update the lists state with the new list
+    setLists([...lists, newList]);
+  };
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        {/* ... other screens */}
+        <Stack.Screen
+          name="Add List"
+          component={() => <AddList onAddListPress={handleAddList} />}
+          options={{
+            headerTitle: 'Add List',
+            headerTitleAlign: 'center',
+            // ... other styling options
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 export default function App() {
   return (
@@ -167,6 +195,25 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Welcome />
+      <Logo />
+      <Input onSignInPress={() => navigation.navigate('Homepage')} />
+      {/* Display existing lists */}
+      {lists.map((list, index) => (
+        <View key={index}>
+          <Text>{list.title}</Text>
+          <Text>{list.description}</Text>
+        </View>
+      ))}
+      {/* ... other components */}
+    </View>
+  );
+}
+
 
 const styles = StyleSheet.create({
   container: {
